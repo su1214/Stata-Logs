@@ -1,0 +1,316 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  M:\UCI\Users\kims11_uci\Downloads\Homework 4\homework4_3.log
+  log type:  text
+ opened on:  26 Apr 2019, 22:36:14
+
+. gen year=date
+
+. format year %tdCCYY
+
+. destring year
+must specify either generate or replace option
+r(198);
+
+. destring year, replace
+year already numeric; no replace
+
+. tostring year, replace
+year was float now str5
+
+. tab
+varlist required
+r(100);
+
+. by year: egen priceaver=mean(price)
+not sorted
+r(5);
+
+. sort by date
+variable by not found
+r(111);
+
+. sort year
+
+. by year: egen priceaver=mean(price)
+price not found
+r(111);
+
+. rename d price
+
+. by year: egen priceaver=mean(price)
+(7 missing values generated)
+
+. drop priceaver
+
+. format year %tdCCYY
+string %fmt required for string variables
+r(120);
+
+. destring year, replace
+year: all characters numeric; replaced as int
+
+. format year %tdCCYY
+
+. sort year
+
+. by year: egen priceaver=mean(price)
+(7 missing values generated)
+
+. collapse (mean) price, by(yymm)
+
+. use "M:\UCI\Users\kims11_uci\Downloads\Homework 4\irvine_1bedroomprice.dta", c
+> lear
+
+. rename d price
+
+. gen year=date
+
+. format year %tdCCYY
+
+. destring year, replace
+year already numeric; no replace
+
+. generate date_text2 = string(date, "%td")
+
+. drop date_text2
+
+. generate date_text2 = string(date, "%tdCCYY")
+
+. sort year
+
+. by year: egen priceaver=mean(price)
+(7 missing values generated)
+
+. drop priceaver
+
+. sort year
+
+. drop year
+
+. rename date_text2 year
+
+. sort year
+
+. by year: egen priceaver=mean(price)
+
+. list priceaver if year==2018
+type mismatch
+r(109);
+
+. list priceaver if year="2018"
+type mismatch
+r(109);
+
+. list priceaver
+
+     +----------+
+     | pricea~r |
+     |----------|
+  1. |  1538.75 |
+  2. |  1538.75 |
+  3. |  1538.75 |
+  4. |  1538.75 |
+  5. |  1538.75 |
+     |----------|
+  6. |  1538.75 |
+  7. |  1538.75 |
+  8. |  1538.75 |
+  9. |  1538.75 |
+ 10. |  1538.75 |
+     |----------|
+ 11. |  1538.75 |
+ 12. | 1553.167 |
+ 13. | 1553.167 |
+ 14. | 1553.167 |
+ 15. | 1553.167 |
+     |----------|
+ 16. | 1553.167 |
+ 17. | 1553.167 |
+ 18. | 1553.167 |
+ 19. | 1553.167 |
+ 20. | 1553.167 |
+     |----------|
+ 21. | 1553.167 |
+ 22. | 1553.167 |
+ 23. | 1553.167 |
+ 24. | 1593.875 |
+ 25. | 1593.875 |
+     |----------|
+ 26. | 1593.875 |
+ 27. | 1593.875 |
+ 28. | 1593.875 |
+ 29. | 1593.875 |
+ 30. | 1593.875 |
+     |----------|
+ 31. | 1593.875 |
+ 32. | 1593.875 |
+ 33. | 1593.875 |
+ 34. | 1593.875 |
+ 35. | 1593.875 |
+     |----------|
+ 36. | 1674.542 |
+ 37. | 1674.542 |
+ 38. | 1674.542 |
+ 39. | 1674.542 |
+ 40. | 1674.542 |
+     |----------|
+ 41. | 1674.542 |
+ 42. | 1674.542 |
+ 43. | 1674.542 |
+ 44. | 1674.542 |
+ 45. | 1674.542 |
+     |----------|
+ 46. | 1674.542 |
+ 47. | 1674.542 |
+ 48. | 1743.542 |
+ 49. | 1743.542 |
+ 50. | 1743.542 |
+     |----------|
+ 51. | 1743.542 |
+ 52. | 1743.542 |
+ 53. | 1743.542 |
+ 54. | 1743.542 |
+ 55. | 1743.542 |
+     |----------|
+ 56. | 1743.542 |
+ 57. | 1743.542 |
+ 58. | 1743.542 |
+ 59. | 1743.542 |
+ 60. |  1793.75 |
+     |----------|
+ 61. |  1793.75 |
+ 62. |  1793.75 |
+ 63. |  1793.75 |
+ 64. |  1793.75 |
+ 65. |  1793.75 |
+     |----------|
+ 66. |  1793.75 |
+ 67. |  1793.75 |
+ 68. |  1793.75 |
+ 69. |  1793.75 |
+ 70. |  1793.75 |
+     |----------|
+ 71. |  1793.75 |
+ 72. | 1893.333 |
+ 73. | 1893.333 |
+ 74. | 1893.333 |
+ 75. | 1893.333 |
+     |----------|
+ 76. | 1893.333 |
+ 77. | 1893.333 |
+ 78. | 1893.333 |
+ 79. | 1893.333 |
+ 80. | 1893.333 |
+     |----------|
+ 81. | 1893.333 |
+ 82. | 1893.333 |
+ 83. | 1893.333 |
+ 84. |   1986.5 |
+ 85. |   1986.5 |
+     |----------|
+ 86. |   1986.5 |
+ 87. |   1986.5 |
+ 88. |   1986.5 |
+ 89. |   1986.5 |
+ 90. |   1986.5 |
+     |----------|
+ 91. |   1986.5 |
+ 92. |   1986.5 |
+ 93. |   1986.5 |
+ 94. |   1986.5 |
+ 95. |   1986.5 |
+     |----------|
+ 96. | 2030.667 |
+ 97. | 2030.667 |
+ 98. | 2030.667 |
+ 99. | 2030.667 |
+100. | 2030.667 |
+     |----------|
+101. | 2030.667 |
+102. | 2030.667 |
+103. | 2030.667 |
+104. | 2030.667 |
+105. | 2030.667 |
+     |----------|
+106. | 2030.667 |
+107. | 2030.667 |
+108. | 2055.833 |
+109. | 2055.833 |
+110. | 2055.833 |
+     +----------+
+
+. sum priceaver
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+   priceaver |        110    1766.602    177.9959    1538.75   2055.833
+
+. list priceaver, if year==2018
+option if not allowed
+r(198);
+
+. help list
+
+. keep year priceaver
+
+. collapse (mean) price, by(year)
+
+. list
+
+     +-----------------+
+     | year   pricea~r |
+     |-----------------|
+  1. | 2010    1538.75 |
+  2. | 2011   1553.167 |
+  3. | 2012   1593.875 |
+  4. | 2013   1674.542 |
+  5. | 2014   1743.542 |
+     |-----------------|
+  6. | 2015    1793.75 |
+  7. | 2016   1893.333 |
+  8. | 2017     1986.5 |
+  9. | 2018   2030.667 |
+ 10. | 2019   2055.833 |
+     +-----------------+
+
+. use "M:\UCI\Users\kims11_uci\Downloads\Homework 4\irvine_1bedroomprice.dta", c
+> lear
+
+. keep yymm d date
+
+. rename d price
+
+. gen pricechangerate=(price[_n]-price[_n-12])/price[_n-12]
+(19 missing values generated)
+
+. tsset date
+        time variable:  date, 2010/02 to 2019/03, but with gaps
+                delta:  1 day
+
+. tsline pricechangerate
+
+. graph export "M:\UCI\Users\kims11_uci\Downloads\Homework 4\Q7_2.png", as(png) 
+> replace
+(note: file M:\UCI\Users\kims11_uci\Downloads\Homework 4\Q7_2.png not found)
+(file M:\UCI\Users\kims11_uci\Downloads\Homework 4\Q7_2.png written in PNG forma
+> t)
+
+. sum price
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       price |        103    1782.087    179.0226       1490       2085
+
+. sum pricechangerate
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+pricechang~e |         91    .0372607    .0417683   -.047619   .1523179
+
+. log close
+      name:  <unnamed>
+       log:  M:\UCI\Users\kims11_uci\Downloads\Homework 4\homework4_3.log
+  log type:  text
+ closed on:  26 Apr 2019, 22:53:51
+--------------------------------------------------------------------------------

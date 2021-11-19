@@ -1,0 +1,104 @@
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 5\homework5_1.log
+  log type:  text
+ opened on:   3 May 2019, 14:05:09
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 5\
+> CORSUS.TXT"
+(1 var, 992 obs)
+
+. ttest support=75
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ support |     992    67.75504    .8531463    26.87072    66.08086    69.42922
+------------------------------------------------------------------------------
+    mean = mean(support)                                          t =  -8.4920
+Ho: mean = 75                                    degrees of freedom =      991
+
+    Ha: mean < 75               Ha: mean != 75                 Ha: mean > 75
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+
+. display (67.75504-75)/stdv/sqrt(992)
+stdv not found
+r(111);
+
+. display mean/Std. Dev./sqrt(992)
+mean not found
+r(111);
+
+. display (67.75504-75)/26.87072/sqrt(992)
+-.00856053
+
+. display invttail (991, 0.025)
+invttail not found
+r(111);
+
+. display invttail(991, 0.025)
+1.9623607
+
+. diplay (67.75504-75)/.8531463
+command diplay is unrecognized
+r(199);
+
+. display (67.75504-75)/.8531463
+-8.4920488
+
+. *reject the null hypothesis
+
+. *question 6
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 5\
+> NFDA.TXT", clear 
+(1 var, 36 obs)
+
+. ttest revenue=6500
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ revenue |      36    6.819444    .2108117     1.26487    6.391474    7.247415
+------------------------------------------------------------------------------
+    mean = mean(revenue)                                          t = -3.1e+04
+Ho: mean = 6500                                  degrees of freedom =       35
+
+   Ha: mean < 6500             Ha: mean != 6500               Ha: mean > 6500
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+
+. ttest revenue=6.5
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ revenue |      36    6.819444    .2108117     1.26487    6.391474    7.247415
+------------------------------------------------------------------------------
+    mean = mean(revenue)                                          t =   1.5153
+Ho: mean = 6.5                                   degrees of freedom =       35
+
+   Ha: mean < 6.5               Ha: mean != 6.5               Ha: mean > 6.5
+ Pr(T < t) = 0.9307         Pr(|T| > |t|) = 0.1387          Pr(T > t) = 0.0693
+
+. diplay invttail(35, 0.05)
+command diplay is unrecognized
+r(199);
+
+. display invttail(35, 0.05)
+1.6895725
+
+. display (6.819444-6.5)/.2108117
+1.5153049
+
+. *can't reject null hypothesis
+
+. log close
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 5\homewor
+> k5_1.log
+  log type:  text
+ closed on:   3 May 2019, 14:12:37
+--------------------------------------------------------------------------------

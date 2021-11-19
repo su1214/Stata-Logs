@@ -1,0 +1,206 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\homewor
+> k6_1.log
+  log type:  text
+ opened on:  10 May 2019, 13:11:55
+
+. use "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta"
+
+. merge 1:1 date using \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework
+>  6\BA.dta
+invalid '6' 
+r(198);
+
+. destring SP500, replace
+SP500 already numeric; no replace
+
+. clear
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> SCREEN.TXT"
+(1 var, 13 obs)
+
+. * H0= mean=<0, Ha = mean >0
+
+. sum return
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      return |         13    10.82308     7.71148       -1.6       24.8
+
+. mean return
+
+Mean estimation                   Number of obs   =         13
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+      return |   10.82308    2.13878      6.163076    15.48308
+--------------------------------------------------------------
+
+. ttest
+varlist required
+r(100);
+
+. ttest return
+by() option required
+r(100);
+
+. ttest return by(0.05)
+factor variables and time-series operators not allowed
+r(101);
+
+. help ttest
+
+. help ttest
+
+. help ttest return==0
+
+. ttest return==0
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+  return |      13    10.82308     2.13878     7.71148    6.163076    15.48308
+------------------------------------------------------------------------------
+    mean = mean(return)                                           t =   5.0604
+Ho: mean = 0                                     degrees of freedom =       12
+
+    Ha: mean < 0                 Ha: mean != 0                 Ha: mean > 0
+ Pr(T < t) = 0.9999         Pr(|T| > |t|) = 0.0003          Pr(T > t) = 0.0001
+
+. clear
+
+. *question 3
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> FLEX.TXT"
+(1 var, 11 obs)
+
+. desc
+
+Contains data
+  obs:            11                          
+ vars:             1                          
+ size:            11                          
+--------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+--------------------------------------------------------------------------------
+choice          byte    %8.0g                 CHOICE
+--------------------------------------------------------------------------------
+Sorted by: 
+     Note: Dataset has changed since last saved.
+
+. sum
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      choice |         11    58.90909     7.77759         43         76
+
+. mean choice
+
+Mean estimation                   Number of obs   =         11
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+      choice |   58.90909   2.345032      53.68403    64.13415
+--------------------------------------------------------------
+
+. help ttest
+
+. * H0: mean=50 Ha: mean>43
+
+. ttest choice choice>43
+> invalid name
+r(198);
+
+. ttest choice choice==43
+== invalid name
+r(198);
+
+. ttest  choice>43
+> invalid name
+r(198);
+
+. ttest choice==43
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+  choice |      11    58.90909    2.345032     7.77759    53.68403    64.13415
+------------------------------------------------------------------------------
+    mean = mean(choice)                                           t =   6.7842
+Ho: mean = 43                                    degrees of freedom =       10
+
+    Ha: mean < 43               Ha: mean != 43                 Ha: mean > 43
+ Pr(T < t) = 1.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 0.0000
+
+. ttest choice==50
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+  choice |      11    58.90909    2.345032     7.77759    53.68403    64.13415
+------------------------------------------------------------------------------
+    mean = mean(choice)                                           t =   3.7991
+Ho: mean = 50                                    degrees of freedom =       10
+
+    Ha: mean < 50               Ha: mean != 50                 Ha: mean > 50
+ Pr(T < t) = 0.9983         Pr(|T| > |t|) = 0.0035          Pr(T > t) = 0.0017
+
+. * H0: mean=43 Ha: mean>43
+
+. *question 2
+
+. clear
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> SCREEN.TXT"
+(1 var, 13 obs)
+
+. sum return
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      return |         13    10.82308     7.71148       -1.6       24.8
+
+. mean return
+
+Mean estimation                   Number of obs   =         13
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+      return |   10.82308    2.13878      6.163076    15.48308
+--------------------------------------------------------------
+
+. display 10.82308/(7.71148/sqrt(13))
+5.0603995
+
+. ttest return==0
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+  return |      13    10.82308     2.13878     7.71148    6.163076    15.48308
+------------------------------------------------------------------------------
+    mean = mean(return)                                           t =   5.0604
+Ho: mean = 0                                     degrees of freedom =       12
+
+    Ha: mean < 0                 Ha: mean != 0                 Ha: mean > 0
+ Pr(T < t) = 0.9999         Pr(|T| > |t|) = 0.0003          Pr(T > t) = 0.0001
+
+. log close
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\homewor
+> k6_1.log
+  log type:  text
+ closed on:  10 May 2019, 13:58:25
+--------------------------------------------------------------------------------

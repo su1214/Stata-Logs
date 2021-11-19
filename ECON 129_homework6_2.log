@@ -1,0 +1,556 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\homewor
+> k6_2.log
+  log type:  text
+ opened on:  12 May 2019, 09:08:54
+
+. merge 1:1 date using "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homewor
+> k 6\BA.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                                21  (_merge==3)
+    -----------------------------------------
+
+. drop _merge
+
+. tsset yymm
+        time variable:  yymm, 10/04/2019 to 09/05/2019, but with gaps
+                delta:  1 day
+
+. twoway (tsline BA SP500)
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\Q1.p
+> ng", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\Q1.png n
+> ot found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\Q1.png written
+>  in PNG format)
+
+. do "C:\Users\KIMS11~1\AppData\Local\Temp\13\STD00000000.tmp"
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> BA.csv"
+no; data in memory would be lost
+r(4);
+
+end of do-file
+
+r(4);
+
+. clear
+
+. do "C:\Users\KIMS11~1\AppData\Local\Temp\13\STD00000000.tmp"
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> BA.csv", clear
+(7 vars, 21 obs)
+
+. 
+. keep date close
+
+. 
+. rename close BA
+
+. 
+. label variable BA "Close_BA"
+
+. 
+. gen yymm=date(date, "YMD")
+
+. 
+. format yymm %tdDD/NN/CCYY
+
+. 
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta"
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta saved
+
+. 
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> HUV.TO.csv", clear 
+(7 vars, 21 obs)
+
+. 
+. keep date close
+
+. 
+. gen yymm=date(date, "YMD")
+
+. 
+. format yymm %tdDD/NN/CCYY
+
+. 
+. rename close SP500
+
+. 
+. label variable SP500 "Close_SP500"
+
+. 
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta"
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta saved
+
+. 
+. merge 1:1 date using "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homewor
+> k 6\BA.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                                21  (_merge==3)
+    -----------------------------------------
+
+. 
+. twoway (tsline BA SP500)
+time variable not set, use tsset varname ...
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\KIMS11~1\AppData\Local\Temp\13\STD00000000.tmp"
+
+. tsset yymm
+        time variable:  yymm, 10/04/2019 to 09/05/2019, but with gaps
+                delta:  1 day
+
+. 
+. twoway (tsline BA SP500)
+
+. 
+end of do-file
+
+. do "C:\Users\KIMS11~1\AppData\Local\Temp\13\STD00000000.tmp"
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> BA.csv", clear
+(7 vars, 63 obs)
+
+. 
+. keep date close
+variable date not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\KIMS11~1\AppData\Local\Temp\13\STD00000000.tmp"
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> BA.csv", clear
+(7 vars, 63 obs)
+
+. 
+end of do-file
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> BA.csv", varnames(1) clear 
+(7 vars, 62 obs)
+
+. do "C:\Users\KIMS11~1\AppData\Local\Temp\13\STD00000000.tmp"
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> BA.csv", varnames(1) clear
+(7 vars, 62 obs)
+
+. 
+. keep date close
+
+. 
+. rename close BA
+
+. 
+. label variable BA "Close_BA"
+
+. 
+. gen yymm=date(date, "YMD")
+
+. 
+. format yymm %tdDD/NN/CCYY
+
+. 
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta", rep
+> lace
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta saved
+
+. 
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> HUV.TO.csv", varnames(1) clear 
+(7 vars, 20 obs)
+
+. 
+. keep date close
+
+. 
+. gen yymm=date(date, "YMD")
+
+. 
+. format yymm %tdDD/NN/CCYY
+
+. 
+. rename close SP500
+
+. 
+. label variable SP500 "Close_SP500"
+
+. 
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta", 
+> replace
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta saved
+
+. 
+. merge 1:1 date using "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homewor
+> k 6\BA.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                            78
+        from master                        18  (_merge==1)
+        from using                         60  (_merge==2)
+
+    matched                                 2  (_merge==3)
+    -----------------------------------------
+
+. 
+. tsset yymm
+        time variable:  yymm, 01/05/2014 to 10/05/2019, but with gaps
+                delta:  1 day
+
+. 
+. twoway (tsline BA SP500)
+string variables not allowed in varlist;
+BA is a string variable
+r(109);
+
+end of do-file
+
+r(109);
+
+. do "C:\Users\KIMS11~1\AppData\Local\Temp\13\STD00000000.tmp"
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> BA.csv", varnames(1) clear
+(7 vars, 62 obs)
+
+. 
+. keep date close
+
+. 
+. rename close BA
+
+. 
+. label variable BA "Close_BA"
+
+. 
+. destring BA, replace
+BA: contains nonnumeric characters; no replace
+
+. 
+. gen yymm=date(date, "YMD")
+
+. 
+. format yymm %tdDD/NN/CCYY
+
+. 
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta", rep
+> lace
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta saved
+
+. 
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> HUV.TO.csv", varnames(1) clear 
+(7 vars, 20 obs)
+
+. 
+. keep date close
+
+. 
+. gen yymm=date(date, "YMD")
+
+. 
+. format yymm %tdDD/NN/CCYY
+
+. 
+. rename close SP500
+
+. 
+. label variable SP500 "Close_SP500"
+
+. 
+. destring SP500, replace
+SP500 already numeric; no replace
+
+. 
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta", 
+> replace
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta saved
+
+. 
+. merge 1:1 date using "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homewor
+> k 6\BA.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                            78
+        from master                        18  (_merge==1)
+        from using                         60  (_merge==2)
+
+    matched                                 2  (_merge==3)
+    -----------------------------------------
+
+. 
+. tsset yymm
+        time variable:  yymm, 01/05/2014 to 10/05/2019, but with gaps
+                delta:  1 day
+
+. 
+. twoway (tsline BA SP500)
+string variables not allowed in varlist;
+BA is a string variable
+r(109);
+
+end of do-file
+
+r(109);
+
+. do "C:\Users\KIMS11~1\AppData\Local\Temp\13\STD00000000.tmp"
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> BA.csv", varnames(1) clear
+(7 vars, 62 obs)
+
+. 
+. keep date close
+
+. 
+. rename close BA
+
+. 
+. label variable BA "Close_BA"
+
+. 
+. destring BA, replace
+BA: contains nonnumeric characters; no replace
+
+. 
+. gen yymm=date(date, "YMD")
+
+. 
+. format yymm %tdDD/NN/CCYY
+
+. 
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta", rep
+> lace
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta saved
+
+. 
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> HUV.TO.csv", varnames(1) clear 
+(7 vars, 20 obs)
+
+. 
+. keep date close
+
+. 
+. gen yymm=date(date, "YMD")
+
+. 
+. format yymm %tdDD/NN/CCYY
+
+. 
+. rename close SP500
+
+. 
+. label variable SP500 "Close_SP500"
+
+. 
+. destring SP500, replace
+SP500 already numeric; no replace
+
+. 
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta", 
+> replace
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta saved
+
+. 
+. merge 1:1 date using "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homewor
+> k 6\BA.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                            78
+        from master                        18  (_merge==1)
+        from using                         60  (_merge==2)
+
+    matched                                 2  (_merge==3)
+    -----------------------------------------
+
+. 
+. tsset yymm
+        time variable:  yymm, 01/05/2014 to 10/05/2019, but with gaps
+                delta:  1 day
+
+. 
+. twoway (tsline BA SP500)
+string variables not allowed in varlist;
+BA is a string variable
+r(109);
+
+end of do-file
+
+r(109);
+
+. do "C:\Users\KIMS11~1\AppData\Local\Temp\13\STD00000000.tmp"
+
+. drop _merge
+
+. 
+. destring BA, replace
+BA: contains nonnumeric characters; no replace
+
+. 
+. destring SP500, replace
+SP500 already numeric; no replace
+
+. 
+. twoway (tsline BA SP500)
+string variables not allowed in varlist;
+BA is a string variable
+r(109);
+
+end of do-file
+
+r(109);
+
+. do "C:\Users\KIMS11~1\AppData\Local\Temp\13\STD00000000.tmp"
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> BA.csv", varnames(1) clear
+(7 vars, 62 obs)
+
+. 
+. keep date close
+
+. 
+. rename close BA
+
+. 
+. label variable BA "Close_BA"
+
+. 
+. replace BA=="" if BA="null"
+== invalid name
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\KIMS11~1\AppData\Local\Temp\13\STD00000000.tmp"
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> BA.csv", varnames(1) clear
+(7 vars, 62 obs)
+
+. 
+. keep date close
+
+. 
+. rename close BA
+
+. 
+. label variable BA "Close_BA"
+
+. 
+. replace BA="" if BA=="null"
+(1 real change made)
+
+. 
+. destring BA, replace
+BA: all characters numeric; replaced as double
+(1 missing value generated)
+
+. 
+. gen yymm=date(date, "YMD")
+
+. 
+. format yymm %tdDD/NN/CCYY
+
+. 
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta", rep
+> lace
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta saved
+
+. 
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> HUV.TO.csv", varnames(1) clear 
+(7 vars, 62 obs)
+
+. 
+. keep date close
+
+. 
+. gen yymm=date(date, "YMD")
+
+. 
+. format yymm %tdDD/NN/CCYY
+
+. 
+. rename close SP500
+
+. 
+. label variable SP500 "Close_SP500"
+
+. 
+. replace SP500="" if SP500=="null"
+(1 real change made)
+
+. 
+. destring SP500, replace
+SP500: all characters numeric; replaced as double
+(1 missing value generated)
+
+. 
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta", 
+> replace
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta saved
+
+. 
+. merge 1:1 date using "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homewor
+> k 6\BA.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                                62  (_merge==3)
+    -----------------------------------------
+
+. 
+. tsset yymm
+        time variable:  yymm, 01/05/2014 to 10/05/2019, but with gaps
+                delta:  1 day
+
+. 
+. drop _merge
+
+. 
+. twoway (tsline BA SP500)
+
+. 
+end of do-file
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\Q1.p
+> ng", as(png) replace
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\Q1.png written
+>  in PNG format)
+
+. log close
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\homewor
+> k6_2.log
+  log type:  text
+ closed on:  12 May 2019, 09:43:45
+--------------------------------------------------------------------------------

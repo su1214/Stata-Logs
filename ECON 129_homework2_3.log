@@ -1,0 +1,162 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\homewor
+> k2_3.log
+  log type:  text
+ opened on:  12 Apr 2019, 11:17:24
+
+. import demitied "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\N
+> FL.TXT", clear
+import: unknown subcommand "demitied"
+r(198);
+
+. import delimitied "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2
+> \NFL.TXT", clear
+import: unknown subcommand "delimitied"
+r(198);
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\
+> NFL.TXT", clear
+(7 vars, 32 obs)
+
+. graph box valuemil
+
+. graph bar valuemil
+
+. graph bar valuemil, over(team)
+
+. sum valuemil
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+    valuemil |         32    1036.313    237.5028        725       1850
+
+. graph bar valuemil, over(team) yline(1036.313)
+
+. graph box valuemil
+
+. graph box valuemil
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Grap
+> h q8-1-box.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8
+> -1-box.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8-1-box
+> .png written in PNG format)
+
+. graph hbar valuemil, over(team)
+
+. graph bar valuemil, over(team) scale(.75)
+
+. graph hbar valuemil, over(team) scale(.75)
+
+. graph hbar valuemil, over(team) scale(.75)
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Grap
+> h q8-1-bar.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8
+> -1-bar.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8-1-bar
+> .png written in PNG format)
+
+. graph hbox valuemil, title("Current Values for the 32 NFL Teams")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Grap
+> h q8-1-box.png", as(png) replace
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8-1-box
+> .png written in PNG format)
+
+. graph hbar valuemil, over(team) scale(.75) title("Current Values for the 32 NF
+> L Teams")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Grap
+> h q8-1-bar.png", as(png) replace
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8-1-bar
+> .png written in PNG format)
+
+. graph hbox chang1yr , title("1-year Change in Current Values for the 32 NFL Te
+> ams")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Grap
+> h q8-2-box.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8
+> -2-box.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8-2-box
+> .png written in PNG format)
+
+. graph hbar chang1yr , over(team) scale(.75) title("1-year Change in Current Va
+> lues for the 32 NFL Teams")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Grap
+> h q8-2-bar.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8
+> -2-bar.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8-2-bar
+> .png written in PNG format)
+
+. graph hbox debtvalue , title("Debt-to-Value Ratios for the 32 NFL Teams")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Grap
+> h q8-3-bar.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8
+> -3-bar.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8-3-bar
+> .png written in PNG format)
+
+. graph hbar debtvalue , over(team) scale(.75) title("Debt-to-Value Ratios for t
+> he 32 NFL Teams")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Grap
+> h q8-3-bar.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8
+> -3-bar.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8-3-bar
+> .png written in PNG format)
+
+. graph hbox revenuemil , title("Annual Revenues (in millions) for the 32 NFL Te
+> ams")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Grap
+> h q8-4-box.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8
+> -4-box.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8-4-box
+> .png written in PNG format)
+
+. graph hbar revenuemil , over(team) scale(.75) title("Annual Revenues (in milli
+> ons) for the 32 NFL Teams")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Grap
+> h q8-4-bar.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8
+> -4-bar.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8-4-bar
+> .png written in PNG format)
+
+. graph hbox incomemil , title("Operating Incomes (in millions) for the 32 NFL T
+> eams")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Grap
+> h q8-5-box.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8
+> -5-box.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8-5-box
+> .png written in PNG format)
+
+. graph hbar incomemil , over(team) scale(.75) title("Operating Incomes (in mill
+> ions) for the 32 NFL Teams")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Grap
+> h q8-5-bar.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8
+> -5-bar.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\Graph q8-5-bar
+> .png written in PNG format)
+
+. log close
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 2\homewor
+> k2_3.log
+  log type:  text
+ closed on:  12 Apr 2019, 11:41:09
+--------------------------------------------------------------------------------

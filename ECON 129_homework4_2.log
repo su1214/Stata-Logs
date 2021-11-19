@@ -1,0 +1,335 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  M:\UCI\Users\kims11_uci\Downloads\Homework 4\homework4_2.log
+  log type:  text
+ opened on:  26 Apr 2019, 18:26:15
+
+. import delimited "M:\UCI\Users\kims11_uci\Downloads\Homework 4\TIMES.TXT"
+no; data in memory would be lost
+r(4);
+
+. describe
+
+Contains data
+  obs:             7                          
+ vars:             5                          
+ size:            35                          
+--------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+--------------------------------------------------------------------------------
+rep             byte    %8.0g                 REP
+sub1a           byte    %8.0g                 SUB1-A
+sub2a           byte    %8.0g                 SUB2-A
+sub1b           byte    %8.0g                 SUB1-B
+sub2b           byte    %8.0g                 SUB2-B
+--------------------------------------------------------------------------------
+Sorted by: 
+     Note: Dataset has changed since last saved.
+
+. sum
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+         rep |          7           4    2.160247          1          7
+       sub1a |          7    30.14286    3.976119         25         38
+       sub2a |          7           3    .8164966          2          4
+       sub1b |          7    30.42857    .9759001         29         32
+       sub2b |          7    4.142857    2.115701          1          7
+
+. mean sub1a
+
+Mean estimation                   Number of obs   =          7
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+       sub1a |   30.14286   1.502832      26.46556    33.82015
+--------------------------------------------------------------
+
+. mean sub2a
+
+Mean estimation                   Number of obs   =          7
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+       sub2a |          3   .3086067      2.244867    3.755133
+--------------------------------------------------------------
+
+. mean sub1b
+
+Mean estimation                   Number of obs   =          7
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+       sub1b |   30.42857   .3688556      29.52601    31.33113
+--------------------------------------------------------------
+
+. mean sub2b
+
+Mean estimation                   Number of obs   =          7
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+       sub2b |   4.142857   .7996598       2.18616    6.099554
+--------------------------------------------------------------
+
+. clear
+
+. import delimited "M:\UCI\Users\kims11_uci\Downloads\Homework 4\City_MedianRent
+> alPrice_1Bedroom_mod.csv"
+(115 vars, 726 obs)
+
+. keep if regionname=="Irvine" & state=="California"
+(726 observations deleted)
+
+. reshape long d, i(regionname) j(yymm)
+(note: j = 201002 201003 201004 201005 201006 201007 201008 201009 201010 201011
+>  201012 201101 201102 201103 201104 201105 201106 201107 201108 201109 201110 
+> 201111 201112 201201 201202 201203 201204 201205 201206 201207 201208 201209 2
+> 01210 201211 201212 201301 201302 201303 201304 201305 201306 201307 201308 20
+> 1309 201310 201311 201312 201401 201402 201403 201404 201405 201406 201407 201
+> 408 201409 201410 201411 201412 201501 201502 201503 201504 201505 201506 2015
+> 07 201508 201509 201510 201511 201512 201601 201602 201603 201604 201605 20160
+> 6 201607 201608 201609 201610 201611 201612 201701 201702 201703 201704 201705
+>  201706 201707 201708 201709 201710 201711 201712 201801 201802 201803 201804 
+> 201805 201806 201807 201808 201809 201810 201811 201812 201901 201902 201903)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                        0   ->       0
+Number of variables                 115   ->       7
+j variable (110 values)                   ->   yymm
+xij variables:
+            d201002 d201003 ... d201903   ->   d
+-----------------------------------------------------------------------------
+
+. tostring yymm, replace
+yymm was float now str1
+
+. gen date=date(yymm,"YM")
+
+. import delimited "M:\UCI\Users\kims11_uci\Downloads\Homework 4\City_MedianRent
+> alPrice_1Bedroom_mod.csv", clear 
+(115 vars, 726 obs)
+
+. keep if regionname=="Irvine"
+(725 observations deleted)
+
+. reshape long d, i(regionname) j(yymm)
+(note: j = 201002 201003 201004 201005 201006 201007 201008 201009 201010 201011
+>  201012 201101 201102 201103 201104 201105 201106 201107 201108 201109 201110 
+> 201111 201112 201201 201202 201203 201204 201205 201206 201207 201208 201209 2
+> 01210 201211 201212 201301 201302 201303 201304 201305 201306 201307 201308 20
+> 1309 201310 201311 201312 201401 201402 201403 201404 201405 201406 201407 201
+> 408 201409 201410 201411 201412 201501 201502 201503 201504 201505 201506 2015
+> 07 201508 201509 201510 201511 201512 201601 201602 201603 201604 201605 20160
+> 6 201607 201608 201609 201610 201611 201612 201701 201702 201703 201704 201705
+>  201706 201707 201708 201709 201710 201711 201712 201801 201802 201803 201804 
+> 201805 201806 201807 201808 201809 201810 201811 201812 201901 201902 201903)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                        1   ->     110
+Number of variables                 115   ->       7
+j variable (110 values)                   ->   yymm
+xij variables:
+            d201002 d201003 ... d201903   ->   d
+-----------------------------------------------------------------------------
+
+. tostring yymm, replace
+yymm was float now str6
+
+. gen date=date(yymm,"YM")
+
+. format date %tdCCYY/NN
+invalid %format
+r(120);
+
+. format date %tdCCYY/NN
+
+. save "M:\UCI\Users\kims11_uci\Downloads\Homework 4\irvine_1bedroomprice.dta"
+file M:\UCI\Users\kims11_uci\Downloads\Homework 4\irvine_1bedroomprice.dta saved
+
+. rename d price
+
+. label data "Price in million dollars"
+
+. label data ""
+
+. label variable price "Price in million dollars"
+
+. tsline d
+time variable not set, use tsset varname ...
+r(111);
+
+. tsset date
+        time variable:  date, 2010/02 to 2019/03, but with gaps
+                delta:  1 day
+
+. tsline price
+
+. graph export "M:\UCI\Users\kims11_uci\Downloads\Homework 4\Q7.png", as(png) re
+> place
+(note: file M:\UCI\Users\kims11_uci\Downloads\Homework 4\Q7.png not found)
+(file M:\UCI\Users\kims11_uci\Downloads\Homework 4\Q7.png written in PNG format)
+
+. sum price
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       price |        103    1782.087    179.0226       1490       2085
+
+. sum price if 2018/01<=date<=2018/12
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       price |        103    1782.087    179.0226       1490       2085
+
+. tab price
+
+   Price in |
+    million |
+    dollars |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       1490 |          1        0.97        0.97
+       1500 |          1        0.97        1.94
+       1505 |          2        1.94        3.88
+       1510 |          2        1.94        5.83
+       1520 |          1        0.97        6.80
+     1524.5 |          1        0.97        7.77
+       1525 |          1        0.97        8.74
+       1526 |          1        0.97        9.71
+       1535 |          1        0.97       10.68
+     1539.5 |          1        0.97       11.65
+       1540 |          1        0.97       12.62
+       1542 |          1        0.97       13.59
+       1560 |          1        0.97       14.56
+       1570 |          1        0.97       15.53
+       1575 |          1        0.97       16.50
+       1580 |          2        1.94       18.45
+       1585 |          2        1.94       20.39
+       1590 |          2        1.94       22.33
+     1592.5 |          1        0.97       23.30
+       1615 |          1        0.97       24.27
+       1647 |          1        0.97       25.24
+     1652.5 |          2        1.94       27.18
+       1665 |          1        0.97       28.16
+       1670 |          2        1.94       30.10
+       1675 |          1        0.97       31.07
+       1680 |          3        2.91       33.98
+       1690 |          2        1.94       35.92
+       1700 |          2        1.94       37.86
+     1702.5 |          1        0.97       38.83
+       1710 |          1        0.97       39.81
+       1715 |          1        0.97       40.78
+     1722.5 |          1        0.97       41.75
+       1725 |          1        0.97       42.72
+       1730 |          1        0.97       43.69
+       1740 |          1        0.97       44.66
+       1750 |          1        0.97       45.63
+       1760 |          2        1.94       47.57
+       1765 |          3        2.91       50.49
+       1780 |          2        1.94       52.43
+       1785 |          1        0.97       53.40
+       1800 |          3        2.91       56.31
+       1810 |          3        2.91       59.22
+       1835 |          1        0.97       60.19
+       1845 |          1        0.97       61.17
+       1850 |          1        0.97       62.14
+       1860 |          1        0.97       63.11
+       1865 |          1        0.97       64.08
+       1870 |          2        1.94       66.02
+       1885 |          1        0.97       66.99
+       1890 |          2        1.94       68.93
+       1895 |          1        0.97       69.90
+       1900 |          1        0.97       70.87
+       1905 |          1        0.97       71.84
+       1925 |          1        0.97       72.82
+       1930 |          1        0.97       73.79
+       1935 |          1        0.97       74.76
+       1940 |          1        0.97       75.73
+       1950 |          1        0.97       76.70
+       1955 |          1        0.97       77.67
+       1985 |          2        1.94       79.61
+       1990 |          1        0.97       80.58
+       1995 |          1        0.97       81.55
+       2000 |          1        0.97       82.52
+       2010 |          3        2.91       85.44
+       2015 |          2        1.94       87.38
+       2020 |          1        0.97       88.35
+       2023 |          1        0.97       89.32
+       2025 |          2        1.94       91.26
+       2030 |          2        1.94       93.20
+       2040 |          1        0.97       94.17
+     2047.5 |          1        0.97       95.15
+       2050 |          1        0.97       96.12
+       2073 |          1        0.97       97.09
+       2080 |          1        0.97       98.06
+       2085 |          2        1.94      100.00
+------------+-----------------------------------
+      Total |        103      100.00
+
+. bysort year: egen average_price = mean(price)
+variable year not found
+r(111);
+
+. bysort date: egen average_price = mean(price)
+(7 missing values generated)
+
+. gen year=date
+
+. format date %tdCCYY
+
+. format date %tdCCYY/NN
+
+. format year %tdCCYY
+
+. bysort year: egen average_price = mean(price)
+variable average_price already defined
+r(110);
+
+. drop average_price
+
+. bysort year: egen average_price = mean(price)
+(7 missing values generated)
+
+. by yymm: egen price_yearaverage=mean(price)
+not sorted
+r(5);
+
+. by year: egen price_yearaverage=mean(price)
+(7 missing values generated)
+
+. sort date
+
+. by year: egen price_yearaverage=mean(price)
+not sorted
+r(5);
+
+. sort year
+
+. by year: egen price_yearaverage=mean(price)
+variable price_yearaverage already defined
+r(110);
+
+. drop price_yearaverage
+
+. by year: egen price_yearaverage=mean(price)
+(7 missing values generated)
+
+. drop average_price
+
+. use "M:\UCI\Users\kims11_uci\Downloads\Homework 4\irvine_1bedroomprice.dta"
+no; data in memory would be lost
+r(4);
+
+. view "M:\UCI\Users\kims11_uci\Downloads\Homework 4\homework4.log"
+
+. view "M:\UCI\Users\kims11_uci\Downloads\Homework 4\homework4_1.log"
+
+. view "M:\UCI\Users\kims11_uci\Downloads\Homework 4\homework4_2.log"
+

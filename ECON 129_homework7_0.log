@@ -1,0 +1,399 @@
+---------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\kims11\Desktop\homework7_0.log
+  log type:  text
+ opened on:  16 May 2019, 18:18:40
+
+. use "C:\Users\kims11\Desktop\COLLEGEDEBT.DTA"
+
+. describe
+
+Contains data from C:\Users\kims11\Desktop\COLLEGEDEBT.DT
+> A
+  obs:            92                          
+ vars:             6                          22 Apr 2016
+>  15:09
+ size:         7,452                          
+---------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable la
+> bel
+---------------------------------------------------------
+name            str51   %51s                  State and
+                                     type of college
+state           str14   %14s                  State
+public          byte    %8.0g                 Public = 1
+                                     for public and = 0
+                                     for private
+                                     nonprofit
+year            str7    %9s                   Year
+avedebt         long    %12.0g                Average
+                                     debt of graduated
+                                     seniors of those
+                                     with debt
+pctdebt         float   %9.0g                 Percent of
+                                     gradiate seniors
+                                     with debt
+---------------------------------------------------------
+Sorted by: 
+
+. describe
+
+Contains data from C:\Users\kims11\Desktop\COLLEGEDEBT.DTA
+  obs:            92                          
+ vars:             6                          22 Apr 2016 15:09
+ size:         7,452                          
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+name            str51   %51s                  State and type of college
+state           str14   %14s                  State
+public          byte    %8.0g                 Public = 1 for public and = 0 for private nonprofit
+year            str7    %9s                   Year
+avedebt         long    %12.0g                Average debt of graduated seniors of those with debt
+pctdebt         float   %9.0g                 Percent of gradiate seniors with debt
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sorted by: 
+
+. sum
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        name |          0
+       state |          0
+      public |         92    .5326087    .5016695          0          1
+        year |          0
+     avedebt |         92    27427.99    4148.704       8922      36242
+-------------+---------------------------------------------------------
+     pctdebt |         92    63.02174    8.396726         44         81
+
+. mean avedebt
+
+Mean estimation                   Number of obs   =         92
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+     avedebt |   27427.99   432.5323      26568.82    28287.16
+--------------------------------------------------------------
+
+. sum avedebt
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     avedebt |         92    27427.99    4148.704       8922      36242
+
+. 27427.99+(4148.704/sqrt(92))*invttail(91, 0.025)
+27427.99 is not a valid command name
+r(199);
+
+. display 27427.99+(4148.704/sqrt(92))*invttail(91, 0.025)
+28287.162
+
+. display 27427.99-(4148.704/sqrt(92))*invttail(91, 0.025)
+26568.818
+
+. ttest avedebt == 26666
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ avedebt |      92    27427.99    432.5323    4148.704    26568.82    28287.16
+------------------------------------------------------------------------------
+    mean = mean(avedebt)                                          t =   1.7617
+Ho: mean = 26666                                 degrees of freedom =       91
+
+  Ha: mean < 26666             Ha: mean != 26666             Ha: mean > 26666
+ Pr(T < t) = 0.9593         Pr(|T| > |t|) = 0.0815          Pr(T > t) = 0.0407
+
+. *since the p-value is 0.0815 which is bigger than the significance level 0.05, can't reject the null hypothesis at 0.0
+> 5.
+
+. display invttail(91, 0.025)
+1.9863772
+
+. *since the t-statistic is 1.7617 which is smaller than 1.98, can't reject the null hypothesis at 0.05.
+
+. display (27427.99-26666)/(4148.704/sqrt(92))
+1.7616951
+
+. *(t-statistic manually)
+
+. ttest avedebt == 26666
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ avedebt |      92    27427.99    432.5323    4148.704    26568.82    28287.16
+------------------------------------------------------------------------------
+    mean = mean(avedebt)                                          t =   1.7617
+Ho: mean = 26666                                 degrees of freedom =       91
+
+  Ha: mean < 26666             Ha: mean != 26666             Ha: mean > 26666
+ Pr(T < t) = 0.9593         Pr(|T| > |t|) = 0.0815          Pr(T > t) = 0.0407
+
+. *since the p-value of Ha mean>26666 is 0.0407 which is smaller than 0.05, reject the null hypothesis at 0.05.
+
+. display invttail(91, 0.05)
+1.6617712
+
+. *since the t statistic is 1.7617 which is bigger than the critical value 1.6617712 (one-tailed test), reject the null 
+> hypothesis at 0.05.
+
+. sum
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        name |          0
+       state |          0
+      public |         92    .5326087    .5016695          0          1
+        year |          0
+     avedebt |         92    27427.99    4148.704       8922      36242
+-------------+---------------------------------------------------------
+     pctdebt |         92    63.02174    8.396726         44         81
+
+. *(a) the observation for name, state and year are 0.
+
+. *avedebt min is also significantly smaller than the mean compared to max.
+
+. correlate avedebt pctdebt public
+(obs=92)
+
+             |  avedebt  pctdebt   public
+-------------+---------------------------
+     avedebt |   1.0000
+     pctdebt |   0.4876   1.0000
+      public |  -0.3225  -0.3210   1.0000
+
+
+. *pctdebt is the most highly correlated variable with avedebt
+
+. sum avedebt if public=1
+invalid syntax
+r(198);
+
+. sum avedebt, if public=1
+option if not allowed
+r(198);
+
+. mean avedebt if public=1
+invalid syntax
+r(198);
+
+. sum avedebt if public==1
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     avedebt |         49    26181.33    3574.027      18794      35044
+
+. sum avedebt if public==0
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     avedebt |         43     28848.6    4337.539       8922      36242
+
+. display 28848.6-26181.33
+2667.27
+
+. sum pctdebt if public==1
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     pctdebt |         49     60.5102    8.541864         44         81
+
+. sum pctdebt if public==0
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     pctdebt |         43    65.88372    7.323183         52         81
+
+. display 65.88372-60.5102
+5.37352
+
+. scatter avedebt pctdebt || lfit avedebt pctdebt
+
+. *the scattered dots are near the fitted regression line there are positive relations
+
+. graph export "C:\Users\kims11\Desktop\Q4.png", as(png) replace
+(note: file C:\Users\kims11\Desktop\Q4.png not found)
+(file C:\Users\kims11\Desktop\Q4.png written in PNG format)
+
+. regress avedebt pctdebt
+
+      Source |       SS           df       MS      Number of obs   =        92
+-------------+----------------------------------   F(1, 90)        =     28.07
+       Model |   372394767         1   372394767   Prob > F        =    0.0000
+    Residual |  1.1939e+09        90  13265269.2   R-squared       =    0.2378
+-------------+----------------------------------   Adj R-squared   =    0.2293
+       Total |  1.5663e+09        91  17211747.2   Root MSE        =    3642.2
+
+------------------------------------------------------------------------------
+     avedebt |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+     pctdebt |    240.919   45.47025     5.30   0.000     150.5844    331.2536
+       _cons |   12244.85   2890.663     4.24   0.000     6502.047    17987.66
+------------------------------------------------------------------------------
+
+. * 240.919 means if the percentage debt increases by 1, the average debt increases by 240.919.
+
+. list pctdebt if state==California
+California not found
+r(111);
+
+. list pctdebt if state=="California"
+
+     +---------+
+     | pctdebt |
+     |---------|
+  5. |      53 |
+ 54. |      61 |
+     +---------+
+
+. tabulate pctdebt if state=="California"
+
+ Percent of |
+   gradiate |
+    seniors |
+  with debt |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         53 |          1       50.00       50.00
+         61 |          1       50.00      100.00
+------------+-----------------------------------
+      Total |          2      100.00
+
+. sum pctdebt if state=="California"
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     pctdebt |          2          57    5.656857         53         61
+
+. list pctdebt if state=="California" by public
+invalid 'by' 
+r(198);
+
+. list pctdebt if state=="California", by public
+option by not allowed
+r(198);
+
+. list pctdebt if state=="California" & public==1
+
+     +---------+
+     | pctdebt |
+     |---------|
+  5. |      53 |
+     +---------+
+
+. display 12244.85+240.919*53
+25013.557
+
+. list avedebt if state=="California" & public==1
+
+     +---------+
+     | avedebt |
+     |---------|
+  5. |   19476 |
+     +---------+
+
+. diplay 25013.557-19476
+command diplay is unrecognized
+r(199);
+
+. display 25013.557-19476
+5537.557
+
+. clear
+
+. *question 5
+
+. set obs 1
+number of observations (_N) was 0, now 1
+
+. generate var1 = 1 in 1
+
+. set obs 2
+number of observations (_N) was 1, now 2
+
+. replace var1 = 2 in 2
+(1 real change made)
+
+. set obs 3
+number of observations (_N) was 2, now 3
+
+. replace var1 = 3 in 3
+(1 real change made)
+
+. generate var2 = 1 in 1
+(2 missing values generated)
+
+. replace var2 = 2 in 2
+(1 real change made)
+
+. replace var2 = 6 in 3
+(1 real change made)
+
+. rename var1 x
+
+. rename var2 y
+
+. regress y x
+
+      Source |       SS           df       MS      Number of obs   =         3
+-------------+----------------------------------   F(1, 1)         =      8.33
+       Model |        12.5         1        12.5   Prob > F        =    0.2123
+    Residual |         1.5         1         1.5   R-squared       =    0.8929
+-------------+----------------------------------   Adj R-squared   =    0.7857
+       Total |          14         2           7   Root MSE        =    1.2247
+
+------------------------------------------------------------------------------
+           y |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           x |        2.5   .8660254     2.89   0.212    -8.503896     13.5039
+       _cons |         -2   1.870829    -1.07   0.479    -25.77113    21.77113
+------------------------------------------------------------------------------
+
+. sum x
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+           x |          3           2           1          1          3
+
+. sum y
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+           y |          3           3    2.645751          1          6
+
+. display ((1-2)(1-3)+(2-2)(2-3)+(3-2)(6-3))/((1-2)^2+(2-2)^2+(3-2)^2)
+unknown function ()
+r(133);
+
+. display ((1-2)*(1-3)+(2-2)*(2-3)+(3-2)*(6-3))/((1-2)^2+(2-2)^2+(3-2)^2)
+2.5
+
+. *ybar-b2xbar
+
+. display 3-2.5*2
+-2
+
+. display -2+2.5*1
+.5
+
+. display -2+2.5*2
+3
+
+. display -2+2.5*3
+5.5
+
+. *residual: .5, -1, .5
+
+. *sum of squared residuals: .25+1+.25=1.5
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\kims11\Desktop\homework7_0.log
+  log type:  text
+ closed on:  16 May 2019, 18:51:33
+------------------------------------------------------------------------------------------------------------------------

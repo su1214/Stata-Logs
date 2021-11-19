@@ -1,0 +1,156 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\homewor
+> k4.log
+  log type:  text
+ opened on:  26 Apr 2019, 12:25:37
+
+. use "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\AED_EARNINGS.
+> DTA" 
+(Data for A. Colin Cameron (2015): Analysis of Economics Data, W.W. Norton)
+
+. mean education
+
+Mean estimation                   Number of obs   =        171
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+   education |   14.43275   .2091785      14.01983    14.84567
+--------------------------------------------------------------
+
+. summarize education
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+   education |        171    14.43275    2.735364          3         20
+
+. invttail(170, 0.025)
+command invttail is unrecognized
+r(199);
+
+. invttail (170, 0.025)
+command invttail is unrecognized
+r(199);
+
+. invtail
+command invtail is unrecognized
+r(199);
+
+. invttail
+command invttail is unrecognized
+r(199);
+
+. invttail
+command invttail is unrecognized
+r(199);
+
+. invttail(170,0.025)
+command invttail is unrecognized
+r(199);
+
+. help invttail
+
+. invttail(170,0.025)
+command invttail is unrecognized
+r(199);
+
+. invttail(70,0.025)
+command invttail is unrecognized
+r(199);
+
+. invttail(7,0.025)
+command invttail is unrecognized
+r(199);
+
+. invttail(170,.025)
+command invttail is unrecognized
+r(199);
+
+. invttail(170, 0.025)
+command invttail is unrecognized
+r(199);
+
+. help invttail
+
+. display invttail(170, 0.025)
+1.9740167
+
+. display 14.43275-1.9740167*2.735364
+9.0330958
+
+. display 14.43275+1.9740167*2.735364
+19.832404
+
+. display 14.43275-invttail(170,0.025)*2.735364/sqrt(171)
+14.019828
+
+. display 14.43275+invttail(170,0.025)*2.735364/sqrt(171)
+14.845672
+
+. *question 2
+
+. clear
+
+. display 0*0.6+1000*0.2+9000*0.2
+2000
+
+. display (-2000)^2*.6+(1000)^2*.2+(7000)^2*.2
+12400000
+
+. display sqrt(12400000)
+3521.3634
+
+. *question 3
+
+. *mean of Xbar=300, variance 16, sd 4, likely to mormal
+
+. *question 4
+
+. display 5*1/6
+.83333333
+
+. *E(X) = 1/6
+
+. *variance
+
+. display (0-1/6)^2*5/6+(1-1/6)^2*1/6
+.13888889
+
+. clear
+
+. set obs 1000
+number of observations (_N) was 0, now 1,000
+
+. set seed 12345
+
+. generate u=runiform()
+
+. hist u, start(0) width(0.1)
+(bin=10, start=0, width=.1)
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\Q4.png", as
+> (png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\Q4.png not foun
+> d)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\Q4.png written in PNG
+>  format)
+
+. generate x = 0 replace x = 1 if u < 1/6
+invalid 'replace' 
+r(198);
+
+. generate x = 0, replace x = 1 if u < 1/6
+option replace not allowed
+r(198);
+
+. generate x=0 replace x=1 if u<1/6
+invalid 'replace' 
+r(198);
+
+. log close
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\homework4.log
+  log type:  text
+ closed on:  26 Apr 2019, 12:48:21
+---------------------------------------------------------------------------------------

@@ -1,0 +1,112 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\homewor
+> k6_0.log
+  log type:  text
+ opened on:  10 May 2019, 10:16:28
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> BA.csv", clear 
+(7 vars, 21 obs)
+
+. keep date close
+
+. gen yymm=date(date, "YMD")
+
+. rename close BA
+
+. label variable BA "Close_BA"
+
+. format yymm %tdDD/NN/CCYY
+
+. drop date
+
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta"
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta saved
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> HUV.TO.csv", clear 
+(7 vars, 21 obs)
+
+. keep date close
+
+. gen yymm=date(date, "YMD")
+
+. format yymm %tdDD/NN/CCYY
+
+. drop date
+
+. rename close SP500
+
+. label variable SP500 "Close_SP500"
+
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta"
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta saved
+
+. merge 1:1 yymm using \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework
+>  6\BA.dta
+invalid '6' 
+r(198);
+
+. merge 1:1 date using \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework
+>  6\BA.dta
+variable date not found
+r(111);
+
+. merge 1:1 yymm using \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework
+>  6\BA.dta
+invalid '6' 
+r(198);
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> BA.csv"
+no; data in memory would be lost
+r(4);
+
+. clear
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> BA.csv"
+(7 vars, 21 obs)
+
+. keep date close
+
+. rename close BA
+
+. label variable BA "Close_BA"
+
+. gen yymm=date(date, "YMD")
+
+. format yymm %tdDD/NN/CCYY
+
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta"
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta
+    already exists
+r(602);
+
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta", rep
+> lace
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta saved
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\
+> HUV.TO.csv", clear 
+(7 vars, 21 obs)
+
+. keep date close
+
+. gen yymm=date(date, "YMD")
+
+. format yymm %tdDD/NN/CCYY
+
+. rename close SP500
+
+. label variable SP500 "Close_SP500"
+
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta", 
+> replace
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\SP500.dta saved
+
+. merge 1:1 date using \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 6\BA.dta
+invalid '6' 
+r(198);
+

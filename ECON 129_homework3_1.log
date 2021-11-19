@@ -1,0 +1,304 @@
+----------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\homework3_1.log
+  log type:  text
+ opened on:  19 Apr 2019, 18:54:02
+
+. cd "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3"
+\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3
+
+. use "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\AED_GDPAUSTRALIA.DTA", clear
+(Data for A. Colin Cameron (2015): Analysis of Economics Data, W.W. Norton)
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\ETHICS.TXT", clear 
+(9 vars, 118 obs)
+
+. bar graph yrsprac
+command bar is unrecognized
+r(199);
+
+. graph bar yrsprac
+
+. graph bar, over(yrsprac)
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-6.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-6.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-6.png written in PNG format)
+
+. keep if futureuse=="NO"
+(95 observations deleted)
+
+. sum yrsprac
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     yrsprac |         21    16.42857    10.04774          1         35
+
+. graph bar, over(yrsprac)
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-7.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-7.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-7.png written in PNG format)
+
+. use "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\AED_GDPAUSTRALIA.DTA", clear
+(Data for A. Colin Cameron (2015): Analysis of Economics Data, W.W. Norton)
+
+. keep if futureuse=="YES"
+futureuse not found
+r(111);
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\ETHICS.TXT", clear 
+(9 vars, 118 obs)
+
+. keep if futureuse=="YES"
+(23 observations deleted)
+
+. sum yrsprac
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     yrsprac |         91    14.17582    8.949976          1         40
+
+. graph bar, over(yrsprac)
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-8.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-8.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-8.png written in PNG format)
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\ETHICS.TXT", clear 
+(9 vars, 118 obs)
+
+. sum yrsprac
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     yrsprac |        112    14.59821    9.160687          1         40
+
+. tabstat yrsprac, statistics(range)
+
+    variable |     range
+-------------+----------
+     yrsprac |        39
+------------------------
+
+. tabstat yrsprac, statistics(variance)
+
+    variable |  variance
+-------------+----------
+     yrsprac |  83.91819
+------------------------
+
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\ETHICS.dta"
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\ETHICS.dta saved
+
+. keep if futureuse=="NO"
+(95 observations deleted)
+
+. tabstat yrsprac, statistics(sd)
+
+    variable |        sd
+-------------+----------
+     yrsprac |  10.04774
+------------------------
+
+. use "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\ETHICS.dta", clear
+
+. keep if futureuse=="YES"
+(23 observations deleted)
+
+. tabstat yrsprac, statistics(sd)
+
+    variable |        sd
+-------------+----------
+     yrsprac |  8.949976
+------------------------
+
+. clear
+
+. use "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\AED_GDPAUSTRALIA.DTA", clear
+(Data for A. Colin Cameron (2015): Analysis of Economics Data, W.W. Norton)
+
+. gen inflrate=100*(priceindex-priceindex[_n-4]/priceindex[_n-4])
+(4 missing values generated)
+
+. label inflate "Annual Inflation Rate"
+invalid syntax
+r(198);
+
+. label inflrate "Annual Inflation Rate"
+invalid syntax
+r(198);
+
+. label variable inflrate "Annual Inflation Rate"
+
+. graph twoway (line inflrate quarter)
+
+. clear
+
+. use "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\AED_GDPAUSTRALIA.DTA", clear
+(Data for A. Colin Cameron (2015): Analysis of Economics Data, W.W. Norton)
+
+. gen inflrate=100*((priceindex-priceindex[_n-4])/priceindex[_n-4])
+(4 missing values generated)
+
+. label variable inflrate "Annual Inflation Rate"
+
+. graph twoway (line inflrate quarter)
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q2-1.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q2-1.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q2-1.png written in PNG format)
+
+. tsline ( realgdp)
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q2-2.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q2-2.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q2-2.png written in PNG format)
+
+. gen movave=( realgdp+realgdp[_n-1]+ realgdp[_n-2]+ realgdp[_n-3])
+(3 missing values generated)
+
+. gen movave=(realgdp+realgdp[_n-1]+ realgdp[_n-2]+ realgdp[_n-3])/4, replace
+variable movave already defined
+r(110);
+
+. drop movave
+
+. gen movave=(realgdp+realgdp[_n-1]+ realgdp[_n-2]+ realgdp[_n-3])/4
+(3 missing values generated)
+
+. tsline movave
+
+. label variable movave "Four-Quarter Moving Average of GDP"
+
+. tsline movave
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q2-3.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q2-3.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q2-3.png written in PNG format)
+
+. clear
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\SPASTT01USM661N.csv"
+(2 vars, 711 obs)
+
+. tsline spastt01usm661n
+time variable not set, use tsset varname ...
+r(111);
+
+. tsset date
+string variables not allowed in varlist;
+date is a string variable
+r(109);
+
+. describe
+
+Contains data
+  obs:           711                          
+ vars:             2                          
+ size:         9,954                          
+----------------------------------------------------------------------------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+----------------------------------------------------------------------------------------------------------------------------------------------------
+date            str10   %10s                  DATE
+spastt01usm661n float   %9.0g                 SPASTT01USM661N
+----------------------------------------------------------------------------------------------------------------------------------------------------
+Sorted by: 
+     Note: Dataset has changed since last saved.
+
+. graph twoway (date spastt01usm661n)
+date is not a twoway plot type
+r(198);
+
+. graph twoway (spastt01usm661n date)
+spastt01usm661n is not a twoway plot type
+r(198);
+
+. graph twoway (line spastt01usm661n date)
+string variables not allowed in varlist;
+date is a string variable
+r(109);
+
+. gen edate=date(date, "ymd")
+(711 missing values generated)
+
+. gen date2=daily(date, "ymd"
+too few ')' or ']'
+r(132);
+
+. gen date2=daily(date, "ymd")
+(711 missing values generated)
+
+. drop edate
+
+. gen edate=date(date, "YMD")
+
+. drop dat2
+variable dat2 not found
+r(111);
+
+. drop date2
+
+. gen date2=daily(date, "YMD")
+
+. format date2 %td
+
+. tsline spastt01usm661n
+time variable not set, use tsset varname ...
+r(111);
+
+. tsset date2
+        time variable:  date2, 01jan1960 to 01mar2019, but with gaps
+                delta:  1 day
+
+. tsline spastt01usm661n
+
+. gen year=date(date, "YMD")
+
+. format year %ty
+
+. format date2 %ty
+
+. drop year
+
+. gen year=year(edate)
+
+. format year %tdMonth_dd,_CCYY
+
+. drop year
+
+. format date2 %tdMonth_dd,_CCYY
+
+. tsline spastt01usm661n
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q4-1.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q4-1.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q4-1.png written in PNG format)
+
+. gen ln(SPA)=ln( spastt01usm661n)
+( invalid name
+r(198);
+
+. gen ln(SPA)=ln(spastt01usm661n)
+( invalid name
+r(198);
+
+. gen lnSPA=ln(spastt01usm661n)
+
+. tsline lnSPA
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q4-2.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q4-2.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q4-2.png written in PNG format)
+
+. close log
+command close is unrecognized
+r(199);
+
+. log close
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\homework3_1.log
+  log type:  text
+ closed on:  19 Apr 2019, 20:08:37
+----------------------------------------------------------------------------------------------------------------------------------------------------

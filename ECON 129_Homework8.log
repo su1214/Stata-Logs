@@ -1,0 +1,256 @@
+------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\intra155\Downloads\Homework8\Homework8.log
+  log type:  text
+ opened on:  23 May 2019, 19:42:07
+
+. do "C:\Users\intra155\AppData\Local\Temp\STD00000000.tmp"
+
+. use "C:\Users\intra155\Downloads\Homework8\AED_KNEEREPLACE.DTA"
+no; data in memory would be lost
+r(4);
+
+end of do-file
+
+r(4);
+
+. do "C:\Users\intra155\AppData\Local\Temp\STD00000000.tmp"
+
+. use "C:\Users\intra155\Downloads\Homework8\AED_KNEEREPLACE.DTA", clear
+(Data for A. Colin Cameron (2015): Analysis of Economics Data, W.W. Norton)
+
+. twoway (lfit medcharge medcost) (scatter medcharge medcost)
+
+. graph export "C:\Users\intra155\Downloads\Homework8\Q2.png", as(png) replace
+(file C:\Users\intra155\Downloads\Homework8\Q2.png written in PNG format)
+
+. regress medcharge medcost
+
+      Source |       SS           df       MS      Number of obs   =       167
+-------------+----------------------------------   F(1, 165)       =    199.49
+       Model |  5.2104e+10         1  5.2104e+10   Prob > F        =    0.0000
+    Residual |  4.3096e+10       165   261185437   R-squared       =    0.5473
+-------------+----------------------------------   Adj R-squared   =    0.5446
+       Total |  9.5199e+10       166   573489520   Root MSE        =     16161
+
+------------------------------------------------------------------------------
+   medcharge |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+     medcost |    1.79391   .1270109    14.12   0.000     1.543134    2.044686
+       _cons |   9046.648    2651.66     3.41   0.001     3811.088    14282.21
+------------------------------------------------------------------------------
+
+. predict uhat, resid
+
+. sum uhat
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        uhat |        167    2.28e-07    16112.48  -70126.15   60042.23
+
+. display r(sum)
+.00003815
+
+. display r(sum)/167
+2.284e-07
+
+. gen uhat2=uhat^2
+
+. sum uhat2
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       uhat2 |        167    2.58e+08    5.62e+08   15971.34   4.92e+09
+
+. display sqrt(r(sum)/165)
+16161.232
+
+. *sum of squared residual
+. display r(sum)
+4.310e+10
+
+. mean medcharge
+
+Mean estimation                   Number of obs   =        167
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+   medcharge |   42071.95   1853.124      38413.22    45730.68
+--------------------------------------------------------------
+
+. sum medcharge
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+   medcharge |        167    42071.95    23947.64      12661     209152
+
+. display 23947^2*166
+9.519e+10
+
+. display 4.310^10/9.519^10
+.00036213
+
+. display (4.310*10^10)/(9.519*10^10)
+.45277865
+
+. display 4.310/9.519
+.45277865
+
+. display 1-(4.310*10^10)/(9.519*10^10)
+.54722135
+
+. sum medcharge
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+   medcharge |        167    42071.95    23947.64      12661     209152
+
+. gen zmedcharge=(medcharge-42071.95)/(23947.64/sqrt(167))
+
+. sum medcost
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     medcost |        167    18409.68    9875.962       6399      78077
+
+. gen zmedcost=(medcost-18409.68)/(9875.962/sqrt(167))
+
+. reg zmedcharge zmedcost
+
+      Source |       SS           df       MS      Number of obs   =       167
+-------------+----------------------------------   F(1, 165)       =    199.49
+       Model |  15172.5747         1  15172.5747   Prob > F        =    0.0000
+    Residual |  12549.4278       165  76.0571381   R-squared       =    0.5473
+-------------+----------------------------------   Adj R-squared   =    0.5446
+       Total |  27722.0025       166  167.000015   Root MSE        =    8.7211
+
+------------------------------------------------------------------------------
+  zmedcharge |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+    zmedcost |   .7398052   .0523791    14.12   0.000     .6363856    .8432248
+       _cons |   4.34e-06    .674857     0.00   1.000    -1.332464    1.332473
+------------------------------------------------------------------------------
+
+. *It got smaller.
+.  regress medcharge
+
+      Source |       SS           df       MS      Number of obs   =       167
+-------------+----------------------------------   F(0, 166)       =      0.00
+       Model |           0         0           .   Prob > F        =         .
+    Residual |  9.5199e+10       166   573489520   R-squared       =    0.0000
+-------------+----------------------------------   Adj R-squared   =    0.0000
+       Total |  9.5199e+10       166   573489520   Root MSE        =     23948
+
+------------------------------------------------------------------------------
+   medcharge |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       _cons |   42071.95   1853.124    22.70   0.000     38413.22    45730.68
+------------------------------------------------------------------------------
+
+. mean medcharge
+
+Mean estimation                   Number of obs   =        167
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+   medcharge |   42071.95   1853.124      38413.22    45730.68
+--------------------------------------------------------------
+
+. reg medcost medcharge
+
+      Source |       SS           df       MS      Number of obs   =       167
+-------------+----------------------------------   F(1, 165)       =    199.49
+       Model |  8.8614e+09         1  8.8614e+09   Prob > F        =    0.0000
+    Residual |  7.3294e+09       165  44420383.2   R-squared       =    0.5473
+-------------+----------------------------------   Adj R-squared   =    0.5446
+       Total |  1.6191e+10       166  97534627.3   Root MSE        =    6664.9
+
+------------------------------------------------------------------------------
+     medcost |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+   medcharge |   .3050942    .021601    14.12   0.000     .2624442    .3477443
+       _cons |   5573.766   1044.942     5.33   0.000     3510.586    7636.947
+------------------------------------------------------------------------------
+
+. *same R-squared, slope different
+. reg medcharge meancost
+
+      Source |       SS           df       MS      Number of obs   =       167
+-------------+----------------------------------   F(1, 165)       =    185.90
+       Model |  5.0434e+10         1  5.0434e+10   Prob > F        =    0.0000
+    Residual |  4.4765e+10       165   271303252   R-squared       =    0.5298
+-------------+----------------------------------   Adj R-squared   =    0.5269
+       Total |  9.5199e+10       166   573489520   Root MSE        =     16471
+
+------------------------------------------------------------------------------
+   medcharge |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+    meancost |   1.675377   .1228789    13.63   0.000     1.432759    1.917994
+       _cons |   9052.394   2736.718     3.31   0.001     3648.892    14455.89
+------------------------------------------------------------------------------
+
+. *significant
+. display (1.675377-1)/.1228789
+5.4962813
+
+. display invttail(166, .05)
+1.6540847
+
+. *reject null hypothesis at level of alpha=0.05. it increases more than 1
+. clear
+
+. *question 5
+. use "C:\Users\intra155\Downloads\Homework8\oecdhealth2008.dta"
+
+. regress hexp_gdp gdp_pc
+
+      Source |       SS           df       MS      Number of obs   =        34
+-------------+----------------------------------   F(1, 32)        =      3.84
+       Model |  14.7013391         1  14.7013391   Prob > F        =    0.0588
+    Residual |  122.548369        32  3.82963652   R-squared       =    0.1071
+-------------+----------------------------------   Adj R-squared   =    0.0792
+       Total |  137.249708        33  4.15908205   Root MSE        =    1.9569
+
+------------------------------------------------------------------------------
+    hexp_gdp |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      gdp_pc |   .0000473   .0000242     1.96   0.059    -1.88e-06    .0000965
+       _cons |   7.273534    .894013     8.14   0.000      5.45249    9.094579
+------------------------------------------------------------------------------
+
+. *0.00473 %
+. display 1000*.00473
+4.73
+
+. graph twoway (lfit hexp_gdp hexp_pc)
+
+. graph twoway (lfit hexp_gdp hexp_pc)
+
+. *unitray elasticity)
+. graph twoway (scatter hexp_gdp gdp_pc) (lfit hexp_gdp gdp_pc)
+
+. graph export "C:\Users\intra155\Downloads\Homework8\Q5.png", as(png) replace
+(file C:\Users\intra155\Downloads\Homework8\Q5.png written in PNG format)
+
+. predict uhat, resid
+
+. list country uhat if abs(uhat) > 3
+
+     +--------------------------+
+     |  country_name       uhat |
+     |--------------------------|
+ 20. |    Luxembourg   -4.68882 |
+ 34. | United States   7.113192 |
+     +--------------------------+
+
+. 
+end of do-file
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\intra155\Downloads\Homework8\Homework8.log
+  log type:  text
+ closed on:  23 May 2019, 19:43:48
+------------------------------------------------------------------------------------------------

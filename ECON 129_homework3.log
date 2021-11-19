@@ -1,0 +1,302 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\homewor
+> k3.log
+  log type:  text
+ opened on:  19 Apr 2019, 11:15:04
+
+. import delimited "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\
+> ETHICS.TXT"
+(9 vars, 118 obs)
+
+. graph pie prevuse, plabel(_all name)
+string variables not allowed in varlist;
+prevuse is a string variable
+r(109);
+
+. graph pie help
+variable help not found
+r(111);
+
+. help graph pie
+
+. graph pie, over(prevuse) plabel(_all name)
+
+. graph pie, over(prevuse) plabel(_all name) title("Previous Usage of Ethics Consultation")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-1.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-1.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-1.png written in PNG format)
+
+. graph pie, over(futureuse) plabel(_all name) title("Future Usage of Ethics Consultation")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-2.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-2.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-2.png written in PNG format)
+
+. graph pie, over(prevuse) plabel(_all percent) title("Previous Usage of Ethics Consultation")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-1.png", as(png) replace
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-1.png written in PNG format)
+
+. graph pie, over(futureuse) plabel(_all percent) title("Future Usage of Ethics Consultation")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-2.png", as(png) replace
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-2.png written in PNG format)
+
+. graph pie, over(prevuse) by(spec) plabel(_all percent) title("Previous Usage of Ethics Consultation")
+
+. graph pie, over(prevuse) by(spec) plabel(_all percent) title("Previous Use of Ethics Consultation")
+
+. graph pie, over(prevuse) by(spec) plabel(_all percent) title("Previous Usage of Ethics Consultation")
+
+. graph pie, over(prevuse) by(spec) plabel(_all percent) title("Previous Usage of Ethics Consultation") scale(.75)
+option scale() not allowed
+r(198);
+
+. graph pie, over(prevuse) by(spec) plabel(_all percent) scale(.75) title("Previous Usage of Ethics Consultation")
+option scale() not allowed
+r(198);
+
+. help graph pie
+
+. graph pie, over(prevuse) by(spec) plabel(_all percent) title("Previous Usage of Ethics Consultation")
+
+. graph pie, over(prevuse) by(spec) plabel(_all percent) title("Prevuse of Ethics Consultation")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-3.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-3.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-3.png written in PNG format)
+
+. graph pie, over( futureuse ) by(spec) plabel(_all percent) title("Futureuse of Ethics Consultation")
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-4.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-4.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-4.png written in PNG format)
+
+. histogram yrsprac, by(futureuse)
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-5.png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-5.png not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\Q1-5.png written in PNG format)
+
+. summarize yrsprac
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     yrsprac |        112    14.59821    9.160687          1         40
+
+. summarize yrsprac, detail
+
+                           YRSPRAC
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            1              1
+ 5%            2              1
+10%            3              1       Obs                 112
+25%            7              1       Sum of Wgt.         112
+
+50%           14                      Mean           14.59821
+                        Largest       Std. Dev.      9.160687
+75%           20             32
+90%           27             35       Variance       83.91819
+95%           30             40       Skewness       .4929303
+99%           40             40       Kurtosis       2.678154
+
+. describe
+
+Contains data
+  obs:           118                          
+ vars:             9                          
+ size:         2,242                          
+----------------------------------------------------------------------------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+----------------------------------------------------------------------------------------------------------------------------------------------------
+prevuse         str5    %9s                   PREVUSE
+spec            str4    %9s                   SPEC
+yrsprac         byte    %8.0g                 YRSPRAC
+edyrs           int     %8.0g                 EDYRS
+futureuse       str3    %9s                   FUTUREUSE
+ectrain         byte    %8.0g                 ECTRAIN
+eceduc          byte    %8.0g                 ECEDUC
+ecmoral         byte    %8.0g                 ECMORAL
+ecfull          byte    %8.0g                 ECFULL
+----------------------------------------------------------------------------------------------------------------------------------------------------
+Sorted by: 
+     Note: Dataset has changed since last saved.
+
+. tabstat yrsprac
+
+    variable |      mean
+-------------+----------
+     yrsprac |  14.59821
+------------------------
+
+. tabstat yrsprac, detail
+option detail not allowed
+r(198);
+
+. help tabstat
+
+. tabstat yrsprac, statistics(median)
+
+    variable |       p50
+-------------+----------
+     yrsprac |        14
+------------------------
+
+. list yrsprac
+
+     +---------+
+     | yrsprac |
+     |---------|
+  1. |       6 |
+  2. |      27 |
+  3. |       7 |
+  4. |      25 |
+  5. |       1 |
+     |---------|
+  6. |      30 |
+  7. |      25 |
+  8. |      20 |
+  9. |      10 |
+ 10. |       1 |
+     |---------|
+ 11. |      10 |
+ 12. |       7 |
+ 13. |      35 |
+ 14. |      25 |
+ 15. |      25 |
+     |---------|
+ 16. |      25 |
+ 17. |      18 |
+ 18. |      14 |
+ 19. |       . |
+ 20. |       . |
+     |---------|
+ 21. |      18 |
+ 22. |       8 |
+ 23. |       8 |
+ 24. |      40 |
+ 25. |       5 |
+     |---------|
+ 26. |      25 |
+ 27. |      17 |
+ 28. |      14 |
+ 29. |      10 |
+ 30. |      17 |
+     |---------|
+ 31. |       3 |
+ 32. |      25 |
+ 33. |      24 |
+ 34. |       3 |
+ 35. |      12 |
+     |---------|
+ 36. |       9 |
+ 37. |      11 |
+ 38. |      27 |
+ 39. |      22 |
+ 40. |      10 |
+     |---------|
+ 41. |       5 |
+ 42. |       5 |
+ 43. |      16 |
+ 44. |      19 |
+ 45. |       2 |
+     |---------|
+ 46. |       3 |
+ 47. |      11 |
+ 48. |      13 |
+ 49. |      14 |
+ 50. |      30 |
+     |---------|
+ 51. |      30 |
+ 52. |      12 |
+ 53. |       8 |
+ 54. |       3 |
+ 55. |      29 |
+     |---------|
+ 56. |      25 |
+ 57. |       7 |
+ 58. |       1 |
+ 59. |      14 |
+ 60. |       4 |
+     |---------|
+ 61. |       2 |
+ 62. |       8 |
+ 63. |      32 |
+ 64. |       5 |
+ 65. |      14 |
+     |---------|
+ 66. |      12 |
+ 67. |      18 |
+ 68. |       1 |
+ 69. |       3 |
+ 70. |       7 |
+     |---------|
+ 71. |      20 |
+ 72. |      18 |
+ 73. |      20 |
+ 74. |      20 |
+ 75. |       . |
+     |---------|
+ 76. |      15 |
+ 77. |       2 |
+ 78. |      28 |
+ 79. |      16 |
+ 80. |      20 |
+     |---------|
+ 81. |      15 |
+ 82. |      14 |
+ 83. |       6 |
+ 84. |      20 |
+ 85. |      17 |
+     |---------|
+ 86. |      15 |
+ 87. |      25 |
+ 88. |      13 |
+ 89. |      23 |
+ 90. |      18 |
+     |---------|
+ 91. |       8 |
+ 92. |      20 |
+ 93. |       7 |
+ 94. |       9 |
+ 95. |       . |
+     |---------|
+ 96. |      14 |
+ 97. |       6 |
+ 98. |      15 |
+ 99. |      40 |
+100. |      18 |
+     |---------|
+101. |       1 |
+102. |      16 |
+103. |       2 |
+104. |      10 |
+105. |      30 |
+     |---------|
+106. |       3 |
+107. |      10 |
+108. |      12 |
+109. |       5 |
+110. |      15 |
+     |---------|
+111. |      24 |
+112. |      20 |
+113. |       . |
+114. |       5 |
+115. |       . |
+     |---------|
+116. |      20 |
+117. |      14 |
+118. |      14 |
+     +---------+
+
+. log close
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 3\homework3.log
+  log type:  text
+ closed on:  19 Apr 2019, 11:43:09
+----------------------------------------------------------------------------------------------------------------------------------------------------

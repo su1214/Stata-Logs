@@ -1,0 +1,222 @@
+-----------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\intra155\Downloads\homework5_0.log
+  log type:  text
+ opened on:   2 May 2019, 19:54:02
+
+. display ttail(10, 1.2)
+.12889815
+
+. display ttail(32 1.2)
+invalid syntax
+r(198);
+
+. display ttail(32, 1.2)
+.11947421
+
+. display 2*ttail(32, 1.2)
+.23894842
+
+. display invttail(32, .01)
+2.4486776
+
+. display invttail(32, .01/2)
+2.7384815
+
+. *question 2
+
+. import delimited "C:\Users\intra155\Downloads\Homework 5\CORSUS.TXT"
+(1 var, 992 obs)
+
+. mean
+last estimates not found
+r(301);
+
+. describe
+
+Contains data
+  obs:           992                          
+ vars:             1                          
+ size:         1,984                          
+-----------------------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+-----------------------------------------------------------------------------------------------
+support         int     %8.0g                 Support
+-----------------------------------------------------------------------------------------------
+Sorted by: 
+     Note: Dataset has changed since last saved.
+
+. sum
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     support |        992    67.75504    26.87072          0        155
+
+. mean support
+
+Mean estimation                   Number of obs   =        992
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+     support |   67.75504   .8531463      66.08086    69.42922
+--------------------------------------------------------------
+
+. ttest support
+by() option required
+r(100);
+
+. ttest support by(0.10)
+factor variables and time-series operators not allowed
+r(101);
+
+. mean support by(0.10)
+factor variables and time-series operators not allowed
+r(101);
+
+. help mean
+
+. mean support, level(90)
+
+Mean estimation                   Number of obs   =        992
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [90% Conf. Interval]
+-------------+------------------------------------------------
+     support |   67.75504   .8531463      66.35043    69.15965
+--------------------------------------------------------------
+
+. display invttail(991, 0.05)
+1.6463927
+
+. diplay 67.75504+1.6463927*26.87072/sqrt(992)
+command diplay is unrecognized
+r(199);
+
+. display 67.75504+1.6463927*26.87072/sqrt(992)
+69.159654
+
+. display 67.75504-1.6463927*26.87072/sqrt(992)
+66.350426
+
+. *it agrees
+
+. ttest support=75
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ support |     992    67.75504    .8531463    26.87072    66.08086    69.42922
+------------------------------------------------------------------------------
+    mean = mean(support)                                          t =  -8.4920
+Ho: mean = 75                                    degrees of freedom =      991
+
+    Ha: mean < 75               Ha: mean != 75                 Ha: mean > 75
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+
+. * i don't believe.
+
+. *question 3
+
+. clear
+
+. import delimited "C:\Users\intra155\Downloads\Homework 5\BLKFRI.TXT"
+(4 vars, 38 obs)
+
+. describe
+
+Contains data
+  obs:            38                          
+ vars:             4                          
+ size:           342                          
+-----------------------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+-----------------------------------------------------------------------------------------------
+age             byte    %8.0g                 AGE
+years           byte    %8.0g                 YEARS
+time            str6    %9s                   TIME
+hours           byte    %8.0g                 HOURS
+-----------------------------------------------------------------------------------------------
+Sorted by: 
+     Note: Dataset has changed since last saved.
+
+. *population of interest?
+
+. *b - hours
+
+. mean hours
+
+Mean estimation                   Number of obs   =         38
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+       hours |   6.078947   .4468661      5.173511    6.984384
+--------------------------------------------------------------
+
+. *d - it is in the confidence interval.
+
+. ttest hours=5.5
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+   hours |      38    6.078947    .4468661    2.754668    5.173511    6.984384
+------------------------------------------------------------------------------
+    mean = mean(hours)                                            t =   1.2956
+Ho: mean = 5.5                                   degrees of freedom =       37
+
+   Ha: mean < 5.5               Ha: mean != 5.5               Ha: mean > 5.5
+ Pr(T < t) = 0.8984         Pr(|T| > |t|) = 0.2031          Pr(T > t) = 0.1016
+
+. *question 4
+
+. clear
+
+. use "C:\Users\intra155\Downloads\Homework 5\AED_EARNINGS.DTA", clear
+(Data for A. Colin Cameron (2015): Analysis of Economics Data, W.W. Norton)
+
+. ttest education=14
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+educat~n |     171    14.43275    .2091785    2.735364    14.01983    14.84567
+------------------------------------------------------------------------------
+    mean = mean(education)                                        t =   2.0688
+Ho: mean = 14                                    degrees of freedom =      170
+
+    Ha: mean < 14               Ha: mean != 14                 Ha: mean > 14
+ Pr(T < t) = 0.9800         Pr(|T| > |t|) = 0.0401          Pr(T > t) = 0.0200
+
+. display 14/.2091785
+66.928485
+
+. display 14.43275-14/.2091785
+-52.495735
+
+. display (14.43275-14)/.2091785
+2.0688073
+
+. display ttail(170, 2.0688073)
+.02003892
+
+. display invttail(170, 0.025)
+1.9740167
+
+. * 1.974<2.068 so reject null hypothesis
+
+. display 2*ttail(170, 2.0688073)
+.04007784
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\intra155\Downloads\homework5_0.log
+  log type:  text
+ closed on:   2 May 2019, 20:17:02
+-----------------------------------------------------------------------------------------------

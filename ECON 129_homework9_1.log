@@ -1,0 +1,32 @@
+---------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\kims11\Downloads\Homework9\homework9_1.log
+  log type:  text
+ opened on:  30 May 2019, 23:13:14
+
+. *Question 3
+
+. (a) 500
+( is not a valid command name
+r(199);
+
+. di 200+4*100
+600
+
+. di 50000/110
+454.54545
+
+. (d) 0
+( is not a valid command name
+r(199);
+
+. *(e) 0.010*EARNS
+
+. *(e) 0.90*EARNS/IQ
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\kims11\Downloads\Homework9\homework9_1.log
+  log type:  text
+ closed on:  30 May 2019, 23:18:44
+---------------------------------------------------------------------------------------------

@@ -1,0 +1,85 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\homewor
+> k4_1.log
+  log type:  text
+ opened on:  26 Apr 2019, 14:04:57
+
+. *question 4
+
+. set obs 1000
+number of observations (_N) was 0, now 1,000
+
+. set seed 12345
+
+. generate u=runiform()
+
+. hist u, start(0) width(0.1)
+(bin=10, start=0, width=.1)
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\Q4.p
+> ng", as(png) replace
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\Q4.png written
+>  in PNG format)
+
+. gen x=o
+o not found
+r(111);
+
+. gen x=0
+
+. replace x = 1 if u < 1/6
+(167 real changes made)
+
+. mean x
+
+Mean estimation                   Number of obs   =      1,000
+
+--------------------------------------------------------------
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+           x |       .167   .0118004      .1438435    .1901565
+--------------------------------------------------------------
+
+. sum x
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+           x |      1,000        .167    .3731625          0          1
+
+. display 1/6
+.16666667
+
+. hist x, start(0) width(0.1)
+(bin=10, start=0, width=.1)
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\Q4_2
+> .png", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\Q4_2.png
+>  not found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\Q4_2.png writt
+> en in PNG format)
+
+. clear
+
+. use "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\AED_DIETOSS.D
+> TA", clear
+(Data for A. Colin Cameron (2015): Analysis of Economics Data, W.W. Norton)
+
+. sum xbar
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        xbar |        400     .169975     .037151        .07        .28
+
+. hist xbar
+(bin=20, start=.07, width=.0105)
+
+. graph export "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\Q5.p
+> ng", as(png) replace
+(note: file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\Q5.png n
+> ot found)
+(file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 4\Q5.png written
+>  in PNG format)
+
+. exit, clear

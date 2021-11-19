@@ -1,0 +1,280 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 1\homewor
+> k1_results.log
+  log type:  text
+ opened on:   5 Apr 2019, 14:25:45
+
+. use AED_PRICEEARNINGS.DTA
+(Data for A. Colin Cameron (2015): Analysis of Economics Data, W.W. Norton)
+
+. list in 1/5
+
+     +--------------------------------------------------+
+     |    date   gs10_i~e   pe_ratio   inflation   year |
+     |--------------------------------------------------|
+  1. | 1881.12   3.626667      15.96    6.999728   1881 |
+  2. | 1882.12   3.629167      15.38    -1.86875   1882 |
+  3. | 1883.12   3.620833       14.9   -7.619781   1883 |
+  4. | 1884.12   3.528333      13.43   -10.30882   1884 |
+  5. | 1885.12     3.3825       16.3   -1.149661   1885 |
+     +--------------------------------------------------+
+
+. help import
+
+. import delimited using NFL.txt
+no; data in memory would be lost
+r(4);
+
+. import delimited using NFT.txt, clear
+file NFT.txt not found
+r(601);
+
+. import delimited using NFL.txt, clear
+(7 vars, 32 obs)
+
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 1\NFL.dta"
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 1\NFL.dta saved
+
+. list rank, team and revenue if 300<revenue<400
+option team not allowed
+r(198);
+
+. list rank, team, revenuemil if 300<revenuemil<400
+invalid 'revenuemil' 
+r(198);
+
+. list Rank, Team, Revenue ($mil) if 300<Revenue ($mil)<400
+variable Rank not found
+r(111);
+
+. list rank if 300<revenuemil<400
+
+     +------+
+     | rank |
+     |------|
+  1. |    1 |
+  2. |    2 |
+  3. |    3 |
+  4. |    4 |
+  5. |    5 |
+     |------|
+  6. |    6 |
+  7. |    7 |
+  8. |    8 |
+  9. |    9 |
+ 10. |   10 |
+     |------|
+ 11. |   11 |
+ 12. |   12 |
+ 13. |   13 |
+ 14. |   14 |
+ 15. |   15 |
+     |------|
+ 16. |   16 |
+ 17. |   17 |
+ 18. |   18 |
+ 19. |   19 |
+ 20. |   20 |
+     |------|
+ 21. |   21 |
+ 22. |   22 |
+ 23. |   23 |
+ 24. |   24 |
+ 25. |   25 |
+     |------|
+ 26. |   26 |
+ 27. |   27 |
+ 28. |   28 |
+ 29. |   29 |
+ 30. |   30 |
+     |------|
+ 31. |   31 |
+ 32. |   32 |
+     +------+
+
+. list rank, team, revenuemil if 300<revenuemil<400
+invalid 'revenuemil' 
+r(198);
+
+. list rank, team, and revenuemil if 300<revenuemil<400
+invalid 'and' 
+r(198);
+
+. list rank team revenuemil if 300<revenuemil<400
+
+     +----------------------------------------+
+     | rank                   team   revenu~l |
+     |----------------------------------------|
+  1. |    1         Dallas Cowboys        406 |
+  2. |    2    Washington Redskins        352 |
+  3. |    3   New England Patriots        333 |
+  4. |    4        New York Giants        293 |
+  5. |    5          New York Jets        285 |
+     |----------------------------------------|
+  6. |    6         Houston Texans        283 |
+  7. |    7    Philadelphia Eagles        274 |
+  8. |    8          Chicago Bears        266 |
+  9. |    9      Green Bay Packers        259 |
+ 10. |   10       Baltimore Ravens        262 |
+     |----------------------------------------|
+ 11. |   11     Indianapolis Colts        252 |
+ 12. |   12         Denver Broncos        255 |
+ 13. |   13    Pittsburgh Steelers        255 |
+ 14. |   14         Miami Dolphins        253 |
+ 15. |   15      Carolina Panthers        257 |
+     |----------------------------------------|
+ 16. |   16       Seattle Seahawks        249 |
+ 17. |   17    San Francisco 49ers        234 |
+ 18. |   18     Kansas City Chiefs        252 |
+ 19. |   19   Tampa Bay Buccaneers        245 |
+ 20. |   20       Cleveland Browns        247 |
+     |----------------------------------------|
+ 21. |   21     New Orleans Saints        261 |
+ 22. |   22       Tennessee Titans        250 |
+ 23. |   23     San Diego Chargers        241 |
+ 24. |   24      Arizona Cardinals        240 |
+ 25. |   25     Cincinnati Bengals        236 |
+     |----------------------------------------|
+ 26. |   26          Detroit Lions        228 |
+ 27. |   27        Atlanta Falcons        233 |
+ 28. |   28      Minnesota Vikings        227 |
+ 29. |   29          Buffalo Bills        236 |
+ 30. |   30          St Louis Rams        228 |
+     |----------------------------------------|
+ 31. |   31        Oakland Raiders        217 |
+ 32. |   32   Jacksonville Jaguars        236 |
+     +----------------------------------------+
+
+. input annualdocvisit
+
+     annuald~t
+  1. delete annualdocvisit
+'delete' cannot be read as a number
+  1. close
+'close' cannot be read as a number
+  1. end
+
+. close
+command close is unrecognized
+r(199);
+
+. close NFL.dta
+command close is unrecognized
+r(199);
+
+. .edit
+invalid syntax
+r(198);
+
+. edit
+
+. drop annualdocvisit
+
+. save
+invalid file specification
+r(198);
+
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 1\NFL.dta", re
+> place
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 1\NFL.dta saved
+
+. clear all
+
+. input annualdoctorvisit
+
+     annuald~t
+  1. 0
+  2. 0
+  3. 3
+  4. 4
+  5. 2
+  6. 5
+  7. 5
+  8. 2
+  9. 11
+ 10. 2
+ 11. 1
+ 12. 2
+ 13. 3
+ 14. 0
+ 15. 8
+ 16. 0
+ 17. 8
+ 18. 1
+ 19. 1
+ 20. 4
+ 21. end
+
+. list -5/1
+- invalid name
+r(198);
+
+. list -5/l
+- invalid name
+r(198);
+
+. list -5/I
+- invalid name
+r(198);
+
+. list in -5/l
+
+     +----------+
+     | annual~t |
+     |----------|
+ 16. |        0 |
+ 17. |        8 |
+ 18. |        1 |
+ 19. |        1 |
+ 20. |        4 |
+     +----------+
+
+. close log
+command close is unrecognized
+r(199);
+
+. log close
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 1\homewor
+> k1_results.log
+  log type:  text
+ closed on:   5 Apr 2019, 14:59:11
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 1\homewor
+> k1_results.log
+  log type:  text
+ opened on:   5 Apr 2019, 15:00:37
+
+. save "\\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 1\question3.dt
+> a", replace
+file \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 1\question3.dta s
+> aved
+
+. *4. types of economic data
+
+. *(a) time series, numerical data
+
+. *(b) cross-section, numerical data
+
+. *(c) panel data, numerical data
+
+. *(d) cross-section, categorical
+
+. *5. types of economic data
+
+. *(a) observational
+
+. *(b) experimental
+
+. *(c) observational
+
+. log close
+      name:  <unnamed>
+       log:  \\apporto.com\dfs\UCI\Users\kims11_uci\Downloads\Homework 1\homewor
+> k1_results.log
+  log type:  text
+ closed on:   5 Apr 2019, 15:09:23
+--------------------------------------------------------------------------------

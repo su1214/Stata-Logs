@@ -1,0 +1,600 @@
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\kims11\Downloads\Homework9\homework9_0.log
+  log type:  text
+ opened on:  30 May 2019, 22:14:57
+
+. cd "C:\Users\kims11\Downloads\Homework9"
+C:\Users\kims11\Downloads\Homework9
+
+. use ADVERTISING.DTA
+
+. regress sales tv
+
+      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =    312.14
+       Model |  3.3146e+09         1  3.3146e+09   Prob > F        =    0.0000
+    Residual |  2.1025e+09       198  10618841.6   R-squared       =    0.6119
+-------------+----------------------------------   Adj R-squared   =    0.6099
+       Total |  5.4171e+09       199    27221853   Root MSE        =    3258.7
+
+------------------------------------------------------------------------------
+       sales |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+          tv |   47.53664   2.690607    17.67   0.000     42.23072    52.84256
+       _cons |   7032.594   457.8429    15.36   0.000     6129.719    7935.468
+------------------------------------------------------------------------------
+
+. desc
+
+Contains data from ADVERTISING.DTA
+  obs:           200                          
+ vars:             8                          17 May 2016 17:46
+ size:         6,400                          
+---------------------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+---------------------------------------------------------------------------------------------
+tv              float   %9.0g                 TV advertising in $ thousands
+radio           float   %9.0g                 Radio advertising in $ thousands
+newspaper       float   %9.0g                 Newspaper advertising in $ thousands
+sales           float   %9.0g                 Number of units sold
+lnsales         float   %9.0g                 Natural logarithm of sales
+lntv            float   %9.0g                 Natural logarithm of tv
+lnradio         float   %9.0g                 Natural logarithm of radio
+lnnews          float   %9.0g                 Natural logarithm of newspaper
+---------------------------------------------------------------------------------------------
+Sorted by: 
+
+. di 7032.594+47.53664*100
+11786.258
+
+. sum tv
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+          tv |        200    147.0425    85.85424         .7      296.4
+
+. di 85.85424*199
+17084.994
+
+. di e(rmse)*sqrt(1/200+(100^2/17084.994))
+2503.6768
+
+. di invttail(200, .025)
+1.9718962
+
+. di 11786.258+1.9718962*2503.6768
+16723.249
+
+. di 11786.258-1.9718962*2503.6768
+6849.2672
+
+. *(D)
+
+. di e(rmse)*sqrt(1+1/200+(100^2/17084.994))
+4109.4086
+
+. di 11786.258+1.9718962*4109.4086
+19889.585
+
+. di 11786.258-1.9718962*4109.4086
+3682.9308
+
+. twoway (lfitci sales tv) (scatter sales tv), saving(graph1, replace)
+(note: file graph1.gph not found)
+(file graph1.gph saved)
+
+. graph export "C:\Users\kims11\Downloads\Homework9\Q1_1.png", as(png) replace
+(note: file C:\Users\kims11\Downloads\Homework9\Q1_1.png not found)
+(file C:\Users\kims11\Downloads\Homework9\Q1_1.png written in PNG format)
+
+. twoway (lfitci sales tv, stdf) (scatter sales tv), saving(graph2, replace)
+(note: file graph2.gph not found)
+(file graph2.gph saved)
+
+. graph export "C:\Users\kims11\Downloads\Homework9\Q1_2.png", as(png) replace
+(note: file C:\Users\kims11\Downloads\Homework9\Q1_2.png not found)
+(file C:\Users\kims11\Downloads\Homework9\Q1_2.png written in PNG format)
+
+. graph combine graph1.gph graph2.gph, iscale(1.2) ysize(2.5) xsize(6) rows(1) ycommon
+
+. graph export "C:\Users\kims11\Downloads\Homework9\Q1_3.png", as(png) replace
+(note: file C:\Users\kims11\Downloads\Homework9\Q1_3.png not found)
+(file C:\Users\kims11\Downloads\Homework9\Q1_3.png written in PNG format)
+
+. *Question 2
+
+. twoway (scatter sales tv) (lfit sales tv)
+
+. graph export "C:\Users\kims11\Downloads\Homework9\Q2_1.png", as(png) replace
+(note: file C:\Users\kims11\Downloads\Homework9\Q2_1.png not found)
+(file C:\Users\kims11\Downloads\Homework9\Q2_1.png written in PNG format)
+
+. regress sales tv
+
+      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =    312.14
+       Model |  3.3146e+09         1  3.3146e+09   Prob > F        =    0.0000
+    Residual |  2.1025e+09       198  10618841.6   R-squared       =    0.6119
+-------------+----------------------------------   Adj R-squared   =    0.6099
+       Total |  5.4171e+09       199    27221853   Root MSE        =    3258.7
+
+------------------------------------------------------------------------------
+       sales |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+          tv |   47.53664   2.690607    17.67   0.000     42.23072    52.84256
+       _cons |   7032.594   457.8429    15.36   0.000     6129.719    7935.468
+------------------------------------------------------------------------------
+
+. estimates store DEFAULT
+
+. regress sales tv, vce(robust)
+
+Linear regression                               Number of obs     =        200
+                                                F(1, 198)         =     275.81
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.6119
+                                                Root MSE          =     3258.7
+
+------------------------------------------------------------------------------
+             |               Robust
+       sales |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+          tv |   47.53664   2.862378    16.61   0.000     41.89198     53.1813
+       _cons |   7032.594   333.2578    21.10   0.000     6375.403    7689.784
+------------------------------------------------------------------------------
+
+. estimates store ROBUST
+
+. estimates table DEFAULT ROBUST, b se t
+
+----------------------------------------
+    Variable |  DEFAULT       ROBUST    
+-------------+--------------------------
+          tv |   47.53664     47.53664  
+             |  2.6906072    2.8623782  
+             |      17.67        16.61  
+       _cons |  7032.5936    7032.5936  
+             |  457.84294    333.25782  
+             |      15.36        21.10  
+----------------------------------------
+                          legend: b/se/t
+
+. *Question 4
+
+. regress y x
+variable y not found
+r(111);
+
+. reg sales tv
+
+      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =    312.14
+       Model |  3.3146e+09         1  3.3146e+09   Prob > F        =    0.0000
+    Residual |  2.1025e+09       198  10618841.6   R-squared       =    0.6119
+-------------+----------------------------------   Adj R-squared   =    0.6099
+       Total |  5.4171e+09       199    27221853   Root MSE        =    3258.7
+
+------------------------------------------------------------------------------
+       sales |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+          tv |   47.53664   2.690607    17.67   0.000     42.23072    52.84256
+       _cons |   7032.594   457.8429    15.36   0.000     6129.719    7935.468
+------------------------------------------------------------------------------
+
+. estimates store MODEL1
+
+. reg sales lntv
+
+      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =    257.22
+       Model |  3.0609e+09         1  3.0609e+09   Prob > F        =    0.0000
+    Residual |  2.3562e+09       198  11900116.9   R-squared       =    0.5650
+-------------+----------------------------------   Adj R-squared   =    0.5628
+       Total |  5.4171e+09       199    27221853   Root MSE        =    3449.7
+
+------------------------------------------------------------------------------
+       sales |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lntv |   3900.875   243.2267    16.04   0.000     3421.227    4380.522
+       _cons |  -4202.587   1162.253    -3.62   0.000     -6494.57   -1910.604
+------------------------------------------------------------------------------
+
+. estimates store MODEL2
+
+. reg lnsales tv
+
+      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =    317.09
+       Model |   21.032308         1   21.032308   Prob > F        =    0.0000
+    Residual |  13.1333104       198  .066329851   R-squared       =    0.6156
+-------------+----------------------------------   Adj R-squared   =    0.6137
+       Total |  34.1656184       199  .171686525   Root MSE        =    .25755
+
+------------------------------------------------------------------------------
+     lnsales |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+          tv |   .0037867   .0002127    17.81   0.000     .0033673     .004206
+       _cons |   8.914947   .0361853   246.37   0.000     8.843589    8.986306
+------------------------------------------------------------------------------
+
+. estimates store MODEL3
+
+. reg lnsales lntv
+
+      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =    569.85
+       Model |  25.3555468         1  25.3555468   Prob > F        =    0.0000
+    Residual |  8.81007162       198  .044495311   R-squared       =    0.7421
+-------------+----------------------------------   Adj R-squared   =    0.7408
+       Total |  34.1656184       199  .171686525   Root MSE        =    .21094
+
+------------------------------------------------------------------------------
+     lnsales |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lntv |   .3550358   .0148728    23.87   0.000     .3257063    .3843652
+       _cons |   7.813001   .0710693   109.93   0.000     7.672851    7.953151
+------------------------------------------------------------------------------
+
+. estimates store MODEL4
+
+. estimates table MODEL1 Model2 Model3 Model4, b se t p stat(N r2)
+estimation result Model2 not found
+r(111);
+
+. estimates table MODEL1 MODEL2 MODEL3 MODEL4, b se t p stat(N r2)
+
+------------------------------------------------------------------
+    Variable |   MODEL1       MODEL2       MODEL3       MODEL4    
+-------------+----------------------------------------------------
+          tv |   47.53664                 .00378665               
+             |  2.6906072                 .00021265               
+             |      17.67                     17.81               
+             |     0.0000                    0.0000               
+        lntv |               3900.8746                 .35503575  
+             |               243.22668                  .0148728  
+             |                   16.04                     23.87  
+             |                  0.0000                    0.0000  
+       _cons |  7032.5936   -4202.5873    8.9149475    7.8130006  
+             |  457.84294    1162.2529    .03618532    .07106932  
+             |      15.36        -3.62       246.37       109.93  
+             |     0.0000       0.0004       0.0000       0.0000  
+-------------+----------------------------------------------------
+           N |        200          200          200          200  
+          r2 |  .61187504    .56504367    .61559863    .74213633  
+------------------------------------------------------------------
+                                                  legend: b/se/t/p
+
+. reg sales lntv
+
+      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =    257.22
+       Model |  3.0609e+09         1  3.0609e+09   Prob > F        =    0.0000
+    Residual |  2.3562e+09       198  11900116.9   R-squared       =    0.5650
+-------------+----------------------------------   Adj R-squared   =    0.5628
+       Total |  5.4171e+09       199    27221853   Root MSE        =    3449.7
+
+------------------------------------------------------------------------------
+       sales |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lntv |   3900.875   243.2267    16.04   0.000     3421.227    4380.522
+       _cons |  -4202.587   1162.253    -3.62   0.000     -6494.57   -1910.604
+------------------------------------------------------------------------------
+
+. sum lntv
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        lntv |        200    4.672052    1.005398   -.356675    5.69171
+
+. sum tv
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+          tv |        200    147.0425    85.85424         .7      296.4
+
+. di 3900.875/147.0425
+26.528895
+
+. gen metv=_b[lntv]/tv
+
+. sum metv
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        metv |        200    94.30113    406.8163   13.16085   5572.678
+
+. *94.30
+
+. reg sales tv
+
+      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =    312.14
+       Model |  3.3146e+09         1  3.3146e+09   Prob > F        =    0.0000
+    Residual |  2.1025e+09       198  10618841.6   R-squared       =    0.6119
+-------------+----------------------------------   Adj R-squared   =    0.6099
+       Total |  5.4171e+09       199    27221853   Root MSE        =    3258.7
+
+------------------------------------------------------------------------------
+       sales |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+          tv |   47.53664   2.690607    17.67   0.000     42.23072    52.84256
+       _cons |   7032.594   457.8429    15.36   0.000     6129.719    7935.468
+------------------------------------------------------------------------------
+
+. predict
+'' found where varname expected
+r(7);
+
+. predict sales
+variable sales already defined
+r(110);
+
+. predict saleshat
+(option xb assumed; fitted values)
+
+. sum saleshat
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+    saleshat |        200     14022.5    4081.222   7065.869   21122.45
+
+. sum sales
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       sales |        200     14022.5    5217.457       1600      27000
+
+. *(d) yes
+
+. reg lnsales tv
+
+      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =    317.09
+       Model |   21.032308         1   21.032308   Prob > F        =    0.0000
+    Residual |  13.1333104       198  .066329851   R-squared       =    0.6156
+-------------+----------------------------------   Adj R-squared   =    0.6137
+       Total |  34.1656184       199  .171686525   Root MSE        =    .25755
+
+------------------------------------------------------------------------------
+     lnsales |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+          tv |   .0037867   .0002127    17.81   0.000     .0033673     .004206
+       _cons |   8.914947   .0361853   246.37   0.000     8.843589    8.986306
+------------------------------------------------------------------------------
+
+. predict plnsales, xb
+
+. generate psales=exp(plnsales)
+
+. sum psales
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      psales |        200    13675.95    4350.734   7462.142   22863.81
+
+. *no
+
+. di exp(e(rmse)^2/2)*r(mean)
+14137.116
+
+. generate psales2=exp(e(rmse)^2/2)*psales
+
+. sum psales
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      psales |        200    13675.95    4350.734   7462.142   22863.81
+
+. sum psales2
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     psales2 |        200    14137.12    4497.445   7713.773    23634.8
+
+. di 14022.5-13675.95
+346.55
+
+. di 14022.5-14137.12
+-114.62
+
+. *better
+
+. sort tv
+
+. scatter saleshat tv, c(l) || scatter psales tv, c(l) || scatter psales2 tv, c(l)
+
+. label variable saleshat ""
+
+. scatter saleshat tv, c(l) || scatter psales tv, c(l) || scatter psales2 tv, c(l)
+
+. label variable saleshat "linear-linear"
+
+. label variable psales "log-linear"
+
+. label variable psales2 "log-linear adjusted"
+
+. scatter saleshat tv, c(l) || scatter psales tv, c(l) || scatter psales2 tv, c(l)
+
+. graph export "C:\Users\kims11\Downloads\Homework9\Q4_1.png", as(png) replace
+(note: file C:\Users\kims11\Downloads\Homework9\Q4_1.png not found)
+(file C:\Users\kims11\Downloads\Homework9\Q4_1.png written in PNG format)
+
+. *Question 5
+
+. sum sales tv radio newspaper
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       sales |        200     14022.5    5217.457       1600      27000
+          tv |        200    147.0425    85.85424         .7      296.4
+       radio |        200      23.264    14.84681          0       49.6
+   newspaper |        200      30.554    21.77862         .3        114
+
+. desc
+
+Contains data from ADVERTISING.DTA
+  obs:           200                          
+ vars:            19                          17 May 2016 17:46
+ size:        11,600                          
+---------------------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+---------------------------------------------------------------------------------------------
+tv              float   %9.0g                 TV advertising in $ thousands
+radio           float   %9.0g                 Radio advertising in $ thousands
+newspaper       float   %9.0g                 Newspaper advertising in $ thousands
+sales           float   %9.0g                 Number of units sold
+lnsales         float   %9.0g                 Natural logarithm of sales
+lntv            float   %9.0g                 Natural logarithm of tv
+lnradio         float   %9.0g                 Natural logarithm of radio
+lnnews          float   %9.0g                 Natural logarithm of newspaper
+_est_DEFAULT    byte    %8.0g                 esample() from estimates store
+_est_ROBUST     byte    %8.0g                 esample() from estimates store
+_est_MODEL1     byte    %8.0g                 esample() from estimates store
+_est_MODEL2     byte    %8.0g                 esample() from estimates store
+_est_MODEL3     byte    %8.0g                 esample() from estimates store
+_est_MODEL4     byte    %8.0g                 esample() from estimates store
+metv            float   %9.0g                 
+saleshat        float   %9.0g                 linear-linear
+plnsales        float   %9.0g                 Linear prediction
+psales          float   %9.0g                 log-linear
+psales2         float   %9.0g                 log-linear adjusted
+---------------------------------------------------------------------------------------------
+Sorted by: tv
+     Note: Dataset has changed since last saved.
+
+. range tv
+invalid syntax
+r(198);
+
+. sum sales tv radio newspaper, d
+
+                    Number of units sold
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%         4000           1600
+ 5%         6600           3200
+10%         7800           4800       Obs                 200
+25%        10350           5300       Sum of Wgt.         200
+
+50%        12900                      Mean            14022.5
+                        Largest       Std. Dev.      5217.457
+75%        17400          25400
+90%        21750          25500       Variance       2.72e+07
+95%        23800          26200       Skewness       .4045082
+99%        25850          27000       Kurtosis        2.57143
+
+                TV advertising in $ thousands
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%         4.75             .7
+ 5%        13.15            4.1
+10%         24.4            5.4       Obs                 200
+25%        74.05            7.3       Sum of Wgt.         200
+
+50%       149.75                      Mean           147.0425
+                        Largest       Std. Dev.      85.85424
+75%       219.15          290.7
+90%          262          292.9       Variance        7370.95
+95%       281.05          293.6       Skewness      -.0693283
+99%       293.25          296.4       Kurtosis       1.774103
+
+              Radio advertising in $ thousands
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%          .35              0
+ 5%         1.95             .3
+10%          3.4             .4       Obs                 200
+25%         9.95             .8       Sum of Wgt.         200
+
+50%         22.9                      Mean             23.264
+                        Largest       Std. Dev.      14.84681
+75%        36.55             49
+90%         43.6           49.4       Variance       220.4277
+95%         46.9           49.4       Skewness       .0934669
+99%         49.4           49.6       Kurtosis       1.741038
+
+            Newspaper advertising in $ thousands
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%          .95             .3
+ 5%          3.6             .9
+10%         5.95              1       Obs                 200
+25%         12.7            1.7       Sum of Wgt.         200
+
+50%        25.75                      Mean             30.554
+                        Largest       Std. Dev.      21.77862
+75%         45.1           84.8
+90%        59.35           89.4       Variance       474.3083
+95%        72.05          100.9       Skewness        .887996
+99%        95.15            114       Kurtosis       3.603527
+
+. ttest sales==13000
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+   sales |     200     14022.5    368.9299    5217.457    13294.99    14750.01
+------------------------------------------------------------------------------
+    mean = mean(sales)                                            t =   2.7715
+Ho: mean = 13000                                 degrees of freedom =      199
+
+  Ha: mean < 13000             Ha: mean != 13000             Ha: mean > 13000
+ Pr(T < t) = 0.9969         Pr(|T| > |t|) = 0.0061          Pr(T > t) = 0.0031
+
+. *p value so small can't reject the null hypothesis
+
+. *p value so big can't reject the null hypothesis
+
+. graph matrix sales tv radio newspaper, half
+
+. graph export "C:\Users\kims11\Downloads\Homework9\Q5_1.png", as(png) replace
+(note: file C:\Users\kims11\Downloads\Homework9\Q5_1.png not found)
+(file C:\Users\kims11\Downloads\Homework9\Q5_1.png written in PNG format)
+
+. *in the order of tv, radio and newpaper
+
+. correlate sales tv radio newspaper
+(obs=200)
+
+             |    sales       tv    radio newspa~r
+-------------+------------------------------------
+       sales |   1.0000
+          tv |   0.7822   1.0000
+       radio |   0.5762   0.0548   1.0000
+   newspaper |   0.2283   0.0566   0.3541   1.0000
+
+
+. *in the order of tv, radio and newpaper
+
+. regress sales tv radio newspaper
+
+      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(3, 196)       =    570.27
+       Model |  4.8603e+09         3  1.6201e+09   Prob > F        =    0.0000
+    Residual |   556825286       196  2840945.34   R-squared       =    0.8972
+-------------+----------------------------------   Adj R-squared   =    0.8956
+       Total |  5.4171e+09       199    27221853   Root MSE        =    1685.5
+
+------------------------------------------------------------------------------
+       sales |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+          tv |   45.76465   1.394897    32.81   0.000     43.01371    48.51558
+       radio |     188.53   8.611234    21.89   0.000     171.5474    205.5126
+   newspaper |  -1.037494    5.87101    -0.18   0.860    -12.61595    10.54097
+       _cons |   2938.889   311.9082     9.42   0.000     2323.762    3554.017
+------------------------------------------------------------------------------
+
+. *tv and radio are statistically significant
+
+. *newspaper: negatively related
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\kims11\Downloads\Homework9\homework9_0.log
+  log type:  text
+ closed on:  30 May 2019, 23:12:02
+---------------------------------------------------------------------------------------------
